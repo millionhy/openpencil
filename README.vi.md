@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./apps/desktop/build/icon.png" alt="OpenPencil" width="120" />
+  <img src="./crates/op-host-desktop/assets/icon.png" alt="OpenPencil" width="120" />
 </p>
 
 <h1 align="center">OpenPencil</h1>
@@ -16,8 +16,12 @@
 <p align="center">
   <a href="https://github.com/ZSeven-W/openpencil/stargazers"><img src="https://img.shields.io/github/stars/ZSeven-W/openpencil?style=flat&color=cfb537" alt="Stars" /></a>
   <a href="https://github.com/ZSeven-W/openpencil/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ZSeven-W/openpencil?color=64748b" alt="License" /></a>
-  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/ci.yml?branch=main&label=CI" alt="CI" /></a>
-  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/discord/1476517942949580952?label=Discord&logo=discord&logoColor=white&color=5865F2" alt="Discord" /></a>
+  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/rust-check.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/rust-check.yml?label=CI" alt="CI" /></a>
+  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/badge/Discord-Join%20chat-5865F2?logo=discord&logoColor=white" alt="Discord" /></a>
+</p>
+
+<p align="center">
+  <a href="https://trendshift.io/repositories/24088?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-24088" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/24088" alt="ZSeven-W%2Fopenpencil | Trendshift" width="250" height="55" /></a>
 </p>
 
 <br />
@@ -29,11 +33,18 @@
 </p>
 <p align="center"><sub>Nhấp vào hình ảnh để xem video demo</sub></p>
 
-<br />
-
-> **Lưu ý:** Có một dự án mã nguồn mở khác cùng tên — [OpenPencil](https://github.com/open-pencil/open-pencil), tập trung vào thiết kế trực quan tương thích Figma với cộng tác thời gian thực. Dự án này tập trung vào quy trình AI-native từ thiết kế sang mã.
-
 ## Tại sao chọn OpenPencil
+
+<a href="https://fluxionai.world/register?source=github&amp;campaign=github-openpencil&amp;promo=OPENPENCIL" title="Fluxion AI">
+  <img src="./screenshot/fluxion-ai-sponsor-banner.png" alt="Fluxion AI — reliable, cost-efficient access to GPT, Claude, and other leading AI models through one unified API" width="100%" />
+</a>
+
+### [OpenPencil × Fluxion AI | One unified API for GPT, Claude, and more](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL)
+
+Thanks to [Fluxion AI](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL) for sponsoring OpenPencil!
+
+- ⚡ **Reliable, cost-efficient access:** GPT, Claude, and other leading AI models through one unified API — save up to 70% compared with official API pricing.
+- 🎁 **OpenPencil user bonus:** get **$1 in API credits** when you [sign up through this link](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL).
 
 <table>
 <tr>
@@ -64,7 +75,7 @@ Tự động thích ứng với khả năng của từng mô hình. Claude nhậ
 
 ### 🔌 Máy chủ MCP
 
-Cài đặt một cú nhấp vào Claude Code, Codex, Gemini, OpenCode, Kiro hoặc Copilot CLI. Thiết kế từ terminal — đọc, tạo và chỉnh sửa tệp `.op` thông qua bất kỳ tác nhân tương thích MCP nào.
+Cài đặt một cú nhấp vào Claude Code, Codex, OpenCode, Kiro hoặc Copilot CLI. Thiết kế từ terminal — đọc, tạo và chỉnh sửa tệp `.op` thông qua bất kỳ tác nhân tương thích MCP nào.
 
 </td>
 </tr>
@@ -80,7 +91,7 @@ Tệp `.op` là JSON — dễ đọc, thân thiện Git, dễ so sánh khác bi�
 
 ### 🖥️ Chạy Mọi nơi
 
-Ứng dụng web + desktop gốc trên macOS, Windows và Linux qua Electron. Tự động cập nhật từ GitHub Releases. Liên kết tệp `.op` — nhấp đúp để mở.
+Ứng dụng web + desktop gốc trên macOS, Windows và Linux — một nhân Rust duy nhất, một tệp nhị phân độc lập duy nhất, không có browser engine. Liên kết tệp `.op` — nhấp đúp để mở.
 
 </td>
 </tr>
@@ -102,72 +113,129 @@ Xuất từ một tệp `.op` duy nhất sang React + Tailwind, HTML + CSS, Vue,
 </tr>
 </table>
 
+## Cài đặt
+
+**Biên dịch trên Windows:** [BUILD_WINDOWS.vi.md](./docs/build_windows/BUILD_WINDOWS.vi.md)
+
+**macOS (Homebrew):**
+
+```bash
+brew tap zseven-w/openpencil
+brew install --cask openpencil
+```
+
+**Windows (Scoop):**
+
+```powershell
+scoop bucket add openpencil https://github.com/zseven-w/scoop-openpencil
+scoop install openpencil
+```
+
+**Tải trực tiếp cho Linux / Windows:** [GitHub Releases](https://github.com/ZSeven-W/openpencil/releases) — `.exe` (Windows), `.AppImage` / `.deb` (Linux)
+
+**Nix (Linux x86_64):**
+
+```bash
+nix develop
+nix run .                         # khởi chạy ứng dụng desktop
+nix build .#openpencil            # web host native + web bundle CanvasKit
+nix build .#op-cli                # CLI `op`
+nix build .#prebuilt              # dùng archive desktop upstream tương ứng
+nix build .#prebuilt-cli          # dùng archive CLI upstream tương ứng
+nix build .#web-server            # web server native không cần GL + web bundle
+nix build .#runtime-prebuilt      # runtime desktop dựng sẵn + CLI `op`
+nix build .#web-sdk-packages      # tarball npm cho các web SDK
+nix build .#appimage              # AppImage desktop di động
+```
+
+Flake dùng toolchain Rust được ghim trong `rust-toolchain.toml` và hiện được
+phát hành cho `x86_64-linux`. Flake chưa tạo gói Debian; hãy dùng các artifact
+của release upstream khi cần tệp `.deb`. Các output `prebuilt` dùng phiên bản
+release và hash được ghim trong `nix/release-manifest.json`, độc lập với phiên
+bản source của workspace. Sau khi phát hành release, workflow release sẽ mở PR
+để cập nhật manifest này. Trước khi PR được merge, các output dựng sẵn tiếp tục
+dùng release đã phát hành trước đó; các output dựng từ source luôn dùng source
+đang được checkout.
+
+**CLI (`op`):**
+
+```bash
+brew install zseven-w/openpencil/op
+```
+
+Hoặc dùng script cài đặt (macOS / Linux):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | bash
+```
+
+Để cho phép bản pre-release mới nhất:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | OP_PRERELEASE=1 bash
+```
+
+Windows PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+Để cho phép bản pre-release mới nhất:
+
+```powershell
+$env:OP_PRERELEASE = "1"; irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+## Clone (kèm submodule)
+
+```bash
+git clone --recurse-submodules https://github.com/ZSeven-W/openpencil.git
+# Nếu đã clone, hãy đồng bộ trước để URL submodule cũ nhận thay đổi từ .gitmodules:
+git submodule sync --recursive && git submodule update --init --recursive
+```
+
+Ba submodule nằm trong `vendor/`; tất cả đều công khai và được tải qua HTTPS (không cần khóa SSH): `jian` (framework UI GPU-Skia — widget/render/event), `casement` (fork của winit) và `agent` (`agent-rs` — runtime agent Rust dùng chung giữa các sản phẩm OP và Zode). `vendor/anthropic-agent-sdk` được theo dõi trực tiếp trong repository, không phải submodule.
+
 ## Bắt đầu nhanh
 
 ```bash
-# Cài đặt các phụ thuộc
-bun install
-
-# Khởi động máy chủ phát triển tại http://localhost:3000
-bun --bun run dev
+# Web dev server (builds the CanvasKit wasm bundle, then runs the headless web host)
+bash scripts/start-web-rust.sh
 ```
 
 Hoặc chạy dưới dạng ứng dụng desktop:
 
 ```bash
-bun run electron:dev
+cargo run -p op-host-desktop
 ```
 
-> **Yêu cầu:** [Bun](https://bun.sh/) >= 1.0 và [Node.js](https://nodejs.org/) >= 18
+> **Yêu cầu:** [Rust](https://www.rust-lang.org/) (stable) để build sản phẩm. [Bun](https://bun.sh/) >= 1.0 và [Node.js](https://nodejs.org/) >= 18 chỉ cần cho web SDK trong `packages/`.
 
 ### Docker
 
-Có nhiều biến thể image khác nhau — chọn loại phù hợp với nhu cầu của bạn:
+Các bản phát hành Rust có tag chỉ phát hành một image web host. Các image TypeScript cũ có kèm AI CLI không còn được phát hành.
 
-| Image                        | Kích thước | Bao gồm              |
-| ---------------------------- | ---------- | -------------------- |
-| `openpencil:latest`          | ~226 MB    | Chỉ ứng dụng web     |
-| `openpencil-claude:latest`   | —          | + Claude Code CLI    |
-| `openpencil-codex:latest`    | —          | + Codex CLI          |
-| `openpencil-opencode:latest` | —          | + OpenCode CLI       |
-| `openpencil-copilot:latest`  | —          | + GitHub Copilot CLI |
-| `openpencil-gemini:latest`   | —          | + Gemini CLI         |
-| `openpencil-full:latest`     | ~1 GB      | Tất cả công cụ CLI   |
+| Image | Bao gồm |
+| --- | --- |
+| `ghcr.io/zseven-w/openpencil-web:vX.Y.Z` | Rust web host, wasm bundle và tài nguyên CanvasKit |
 
-**Chạy (chỉ web):**
+Web UI chỉ hiển thị các built-in agent profiles; công cụ Claude/Codex/OpenCode/Copilot CLI không được đóng gói trong Docker images.
+
+**Chạy:**
 
 ```bash
-docker run -d -p 3000:3000 ghcr.io/zseven-w/openpencil:latest
+VERSION="$(scripts/workspace-version.sh)"
+docker run -d -p 3100:3100 "ghcr.io/zseven-w/openpencil-web:v${VERSION}"
 ```
 
-**Chạy với AI CLI (ví dụ Claude Code):**
-
-Chat AI dựa vào đăng nhập OAuth của Claude CLI. Sử dụng Docker volume để lưu phiên đăng nhập:
-
-```bash
-# Bước 1 — Đăng nhập (một lần)
-docker volume create openpencil-claude-auth
-docker run -it --rm \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest claude login
-
-# Bước 2 — Khởi động
-docker run -d -p 3000:3000 \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest
-```
+Sau đó mở `http://localhost:3100/`.
 
 **Build cục bộ:**
 
 ```bash
-# Cơ bản (chỉ web)
-docker build --target base -t openpencil .
-
-# Với một CLI cụ thể
-docker build --target with-claude -t openpencil-claude .
-
-# Đầy đủ (tất cả CLI)
-docker build --target full -t openpencil-full .
+docker build -f Dockerfile.web-rust -t openpencil-web-rust .
+docker run -p 3100:3100 openpencil-web-rust
 ```
 
 ## Thiết kế thuần AI
@@ -188,7 +256,6 @@ docker build --target full -t openpencil-full .
 | **Codex CLI**                      | Kết nối trong Cài đặt tác nhân (`Cmd+,`)                                                                     |
 | **OpenCode**                       | Kết nối trong Cài đặt tác nhân (`Cmd+,`)                                                                     |
 | **GitHub Copilot**                 | `copilot login` rồi kết nối trong Cài đặt tác nhân (`Cmd+,`)                                                 |
-| **Gemini CLI**                     | Kết nối trong Cài đặt tác nhân (`Cmd+,`)                                                                     |
 
 **Hồ sơ Năng lực Mô hình** — tự động thích ứng prompt, chế độ thinking và thời gian chờ theo từng cấp mô hình. Mô hình cấp đầy đủ (Claude) nhận prompt hoàn chỉnh; cấp tiêu chuẩn (GPT-4o, Gemini, DeepSeek) tắt thinking; cấp cơ bản (MiniMax, Qwen, Llama, Mistral) nhận prompt JSON lồng nhau đơn giản hóa để đảm bảo độ tin cậy tối đa.
 
@@ -196,8 +263,8 @@ docker build --target full -t openpencil-full .
 
 **Máy chủ MCP**
 
-- Máy chủ MCP tích hợp sẵn — cài đặt một cú nhấp vào Claude Code / Codex / Gemini / OpenCode / Kiro / Copilot CLI
-- Tự động phát hiện Node.js — nếu chưa cài đặt, tự động chuyển sang HTTP transport và khởi động MCP HTTP server
+- Máy chủ MCP tích hợp sẵn (crate `op-mcp`) — cài đặt một cú nhấp vào Claude Code / Codex / OpenCode / Kiro / Copilot CLI
+- Không cần Node.js — stdio transport qua tệp nhị phân desktop (`--mcp <path>`), cộng với một HTTP endpoint trực tiếp (`127.0.0.1:<port>/mcp`) từ ứng dụng đang chạy
 - Tự động hóa thiết kế từ terminal: đọc, tạo và chỉnh sửa các tệp `.op` qua bất kỳ tác nhân tương thích MCP nào
 - **Quy trình thiết kế phân lớp** — `design_skeleton` → `design_content` → `design_refine` cho thiết kế đa phần có độ trung thực cao hơn
 - **Truy xuất prompt phân đoạn** — chỉ tải kiến thức thiết kế cần thiết (schema, layout, roles, icons, planning, v.v.)
@@ -213,20 +280,22 @@ docker build --target full -t openpencil-full .
 Cài đặt toàn cục và điều khiển công cụ thiết kế từ terminal của bạn:
 
 ```bash
-npm install -g @zseven-w/openpencil
+brew install zseven-w/openpencil/op
 ```
 
 ```bash
 op start                     # Khởi chạy ứng dụng desktop
+op start --headless --file design.op # Khởi chạy máy chủ headless
 op design @landing.txt       # Thiết kế hàng loạt từ tệp
-op insert '{"type":"RECT"}'  # Chèn một node
+op design @ui.js             # JavaScript sandbox với vòng lặp
+op insert '{"type":"rectangle"}' # Chèn một node
 op import:figma design.fig   # Nhập tệp Figma
 cat design.dsl | op design - # Pipe từ stdin
 ```
 
-Hỗ trợ ba phương thức nhập liệu: chuỗi inline, `@filepath` (đọc từ tệp), hoặc `-` (đọc từ stdin). Hoạt động với ứng dụng desktop hoặc web dev server. Xem [CLI README](./apps/cli/README.md) để biết đầy đủ các lệnh.
+Hỗ trợ chuỗi inline, `@filepath` và stdin (`-`). Hoạt động với ứng dụng desktop, web server hoặc server headless dựa trên tệp. Xem [tham chiếu lệnh CLI](./crates/op-cli/src/usage.txt) để biết đầy đủ các lệnh.
 
-**LLM Skill** — cài đặt plugin [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill) để dạy AI agent (Claude Code, Cursor, Codex, Gemini CLI, v.v.) thiết kế bằng `op`.
+**LLM Skill** — cài đặt plugin [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill) để dạy AI agent thiết kế bằng `op`. Chạy `op install` cho các agent được phát hiện hoặc `op install --target codex` cho một đích cụ thể.
 
 ## Tính năng
 
@@ -254,8 +323,30 @@ Hỗ trợ ba phương thức nhập liệu: chuỗi inline, `@filepath` (đọc
 - Quy trình phân lớp — `design_skeleton` → `design_content` → `design_refine` với prompt tập trung cho từng giai đoạn
 - Style Guides — hơn 50 style tích hợp (glassmorphism, brutalist, retro, v.v.) với khớp mờ dựa trên tag, tích hợp vào lập kế hoạch và tạo
 - Hồ sơ năng lực đa mô hình — tự động điều chỉnh chế độ tư duy, nỗ lực và hình thức prompt theo cấp mô hình
-- Runtime tác nhân tích hợp (`agent-native`, Zig NAPI) + nhà cung cấp Anthropic, Claude Agent SDK, OpenCode, Codex, Copilot, Gemini
+- Runtime tác nhân tích hợp (Rust) + nhà cung cấp Anthropic, Claude Agent SDK, OpenCode, Codex, Copilot và Google Gemini API
 - Chuyển tiếp định dạng Anthropic cho các nhà cung cấp LLM Trung Quốc — Kimi, Zhipu, GLM, DouBao, Ark, Bailian/DashScope, ModelScope, Coding Plans
+
+**Cộng tác**
+
+- Phiên peer-to-peer đã xác thực với relay công khai dự phòng và các hub cộng tác khu vực tích hợp sẵn
+- Tham gia bằng mã ghép nối 10 ký tự gắn thẻ khu vực — không cần tài khoản cho các phiên LAN
+- Con trỏ từ xa trực tiếp, cộng tác xuyên tài khoản, và bảng xung đột với chi tiết theo từng chỉnh sửa cùng phát lại các chỉnh sửa đã loại bỏ
+- Chế độ đa tenant trực tuyến cho daemon `--serve-web`, xác thực với op-hub cùng chia sẻ tenant xuyên tài khoản
+- Đăng nhập thiết bị — đăng nhập từ trình duyệt thông qua daemon serve-web, với avatar hồ sơ và tên người dùng trong editor
+
+**Bộ trình chiếu**
+
+- Sáu mẫu bộ trình chiếu 16:9 với trình chọn mẫu, cùng lập kế hoạch bộ trình chiếu bằng AI ở kích thước máy chiếu — mỗi màn hình một slide
+- Trình chiếu bộ slide dưới dạng slideshow với các điều khiển của người thuyết trình
+- Xuất bộ trình chiếu dưới dạng PDF (mỗi slide một trang), tệp HTML slideshow độc lập, PowerPoint có thể chỉnh sửa (`.pptx`), hoặc bố cục video hyperframes
+- Thanh điều hướng slide; tác nhân kiểm tra hình học board của bộ trình chiếu (tỷ lệ, tràn, căn giữa) cũng như prompt
+
+**Mẫu & Thu thập Web**
+
+- Trung tâm mẫu cảnh — danh mục có thể duyệt gồm 58 mẫu trên sáu cảnh, mở từ File ▸ New from template
+- Trung tâm prompt với các mục web, dashboard, component và modify cùng bản xem trước prompt trực quan
+- Trung tâm tài nguyên — thư viện responsive toàn cửa sổ với mẫu hành động kép và nhập kiểu DESIGN.md
+- [Tiện ích thu thập web Chrome](https://chromewebstore.google.com/detail/openpencil/ahfofgelkdaobcmglejmjbpnajhpgcij) — chụp nhanh bất kỳ trang web nào vào OpenPencil với thu thập HTML / layout trung thực; ảnh chụp nhanh được gửi đến hộp thư đến của tài khoản bạn trên hub, hoặc tải xuống dưới dạng tệp `.op` sẵn sàng để mở khi ngoại tuyến
 
 **Tích hợp Git**
 
@@ -278,61 +369,97 @@ Hỗ trợ ba phương thức nhập liệu: chuỗi inline, `@filepath` (đọc
 
 **Ứng dụng Desktop**
 
-- macOS, Windows và Linux gốc qua Electron
+- macOS, Windows và Linux gốc — một tệp nhị phân độc lập duy nhất (winit + GPU Skia, không có Electron)
 - Liên kết tệp `.op` — nhấp đúp để mở, khóa phiên bản đơn
-- Tự động cập nhật từ GitHub Releases
+- Kiểm tra cập nhật nền so với GitHub Releases
 - Menu ứng dụng gốc với Lưu thành, Mở gần đây và hộp thoại thay đổi chưa lưu khi đóng
 - Lưu danh sách tệp gần đây
 
 ## Công nghệ
 
-|                   |                                                                                  |
-| ----------------- | -------------------------------------------------------------------------------- |
-| **Frontend**      | React 19 · TanStack Start · Tailwind CSS v4 · shadcn/ui · i18next                |
-| **Canvas**        | CanvasKit/Skia (WASM, tăng tốc GPU)                                              |
-| **Trạng thái**    | Zustand v5                                                                       |
-| **Máy chủ**       | Nitro                                                                            |
-| **Desktop**       | Electron 35                                                                      |
-| **CLI**           | `op` — điều khiển từ terminal, batch design DSL                                  |
-| **AI**            | Vercel AI SDK v6 · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
-| **Runtime**       | Bun · Vite 7                                                                     |
-| **Định dạng tệp** | `.op` — dựa trên JSON, dễ đọc, thân thiện với Git                                |
+|                    |                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| **Lõi**            | Rust workspace (`crates/`) — trạng thái editor, widget, host, MCP, AI, codegen              |
+| **Dựng hình**      | GPU Skia ở khắp nơi — `skia-safe` (GL) trên nền tảng gốc, CanvasKit (WASM/WebGL2) trên trình duyệt |
+| **Framework UI**   | jian — framework UI GPU-Skia thuần Rust được vendor hóa: widget, layout, sự kiện, hot reload (`vendor/jian`) |
+| **Cửa sổ**         | winit (bản fork `casement` được vendor hóa)                                                 |
+| **Desktop**        | Tệp nhị phân gốc `openpencil-desktop` — không có browser engine                             |
+| **Web SDK**        | `op-web-sdk` + các adapter React 19 / Vue 3 — trình xem `.op` chỉ đọc (TypeScript)           |
+| **CLI**            | `op` — điều khiển từ terminal, batch design DSL                                             |
+| **AI**             | Runtime tác nhân Rust tích hợp sẵn · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
+| **Lint**           | clippy · rustfmt (Rust) · oxlint · oxfmt (web SDK)                                           |
+| **Định dạng tệp**  | `.op` — dựa trên JSON, dễ đọc, thân thiện với Git                                            |
+
+## Hệ sinh thái
+
+OpenPencil là một phần của bộ công cụ thuần Rust, thuần AI đến từ **[ZSeven-W](https://github.com/ZSeven-W)**. Chúng phối hợp với nhau: `jian` dựng hình OpenPencil, `agent-rs` chạy các tác nhân của nó, `noema` ghi nhớ, và `zode` thiết kế từ terminal.
+
+| Dự án | Là gì |
+| ----- | ----- |
+| **[DSH OpenPencil](https://github.com/ZSeven-W/dsh-openpencil)** | Plugin DeepSeek Harness cho OpenPencil — bản xem trước `.op` nhiều khung chính xác, canvas tương tác và trình chỉnh sửa được quản lý với các công cụ thiết kế gốc cho agent, ngay trong cuộc trò chuyện. |
+| **[Zode](https://github.com/ZSeven-W/zode)** | Trợ lý lập trình mã nguồn mở, thuần AI cho terminal của bạn — một Rust TUI nhanh (`ratatui`) đọc mã của bạn, chạy lệnh, tìm kiếm tệp và quản lý git. Điều khiển OpenPencil qua MCP. |
+| **[agent-rs](https://github.com/ZSeven-W/agent-rs)** | Một runtime bất đồng bộ thuần Rust để phát hành các tác nhân LLM — đa nhà cung cấp, hỗ trợ công cụ đầu-cuối, quyền có cấu trúc, MCP thực thụ, không có `unsafe`. Cung cấp năng lượng cho runtime tác nhân tích hợp sẵn của OpenPencil (`vendor/agent`) và Zode. |
+| **[jian](https://github.com/ZSeven-W/jian)** | Framework UI GPU-Skia thuần Rust — widget, layout, sự kiện và hot reload trong một stack duy nhất. Biến một tài liệu `.op` khai báo thành một ứng dụng gốc, có thể điều khiển bằng AI mà không cần JS runtime, không DOM, không Electron. Framework UI của OpenPencil (`vendor/jian`). |
+| **[noema](https://github.com/ZSeven-W/noema)** | Hệ thống bộ nhớ ưu tiên cục bộ, phi vector cho các tác nhân lập trình. Bộ nhớ bền vững dưới dạng tệp có thể kiểm tra, hàng đợi đánh giá cho các mục mới, và truy xuất từ vựng (không cần embedding) — hoạt động trên Zode, Codex, Claude Code và các runtime MCP. |
+
+## Tại sao chọn Rust
+
+OpenPencil đã được viết lại từ đầu bằng **Rust** ([#129](https://github.com/ZSeven-W/openpencil/issues/129)). Việc viết lại đã hoàn tất — editor TypeScript + Electron đã bị khai tử tại `v0.7.5`, và Rust workspace trong repo này chính là sản phẩm: một nhân gốc duy nhất nhỏ hơn và nhanh hơn đáng kể, chạy trên nhiều nền tảng hơn từ một codebase duy nhất.
+
+|                              | TypeScript + Electron (đã khai tử, `v0.7.5`)   | Rust (hiện tại)                                                      |
+| ---------------------------- | ---------------------------------------------- | -------------------------------------------------------------------- |
+| **Runtime desktop**          | Electron — đi kèm Chromium + Node.js           | Cửa sổ gốc (`winit` + GPU Skia), không có browser engine             |
+| **Dung lượng desktop**       | Toàn bộ runtime Chromium mỗi lần cài đặt       | Tệp nhị phân độc lập duy nhất — **55.5 MB**                          |
+| **Tải trọng web**            | Bundle JS + WASM                               | **8.2 MB** wasm / **2.18 MB** gzip qua mạng                         |
+| **Dựng hình**                | CanvasKit/Skia trên web                        | Một backend Skia tăng tốc GPU trên **mọi** nền tảng                  |
+| **Bộ nhớ**                   | Dừng do JavaScript GC                         | Không có GC — sở hữu Rust, độ trễ có thể dự đoán                    |
+| **Codebase**                 | Web stack + Electron          | Một Rust workspace: editor · CLI · MCP · AI · codegen · Figma · Git  |
+| **Nền tảng**                 | Web + desktop, hai stack riêng biệt            | Desktop (macOS/Win/Linux) · mobile (iOS/Android) · browser — một nhân |
+
+**Cải thiện đã đo lường**
+
+- **Dung lượng nhỏ** — toàn bộ ứng dụng desktop là một tệp nhị phân gốc **55.5 MB** thay vì một browser engine đóng gói cùng với Node runtime. Bản dựng web là **8.2 MB** thô / **2.18 MB** gzip sau khi tách catalog icon (−48% qua mạng).
+- **Mở rộng tốt với tài liệu lớn** — canvas trực tiếp với **10,000 node** (auto-layout lồng nhau, bốn cấp độ) ghi, đọc và snapshot layout **không có panic và ~0% CPU khi rỗi**; snapshot layout đầy đủ của toàn bộ 10k node trả về trong **~0.68 s**.
+- **Tương tác nhanh** — pan/zoom không còn tuần tự hóa lại tài liệu mỗi frame (một bản sửa hot-path duy nhất giảm CPU zoom bằng bánh xe từ **~69% xuống ~0%**); kéo cập nhật cảnh gia tăng, đo lường văn bản được cache, và các lần vẽ lại gộp thành một lần mỗi frame.
+- **Một nhân, mọi màn hình** — cùng trạng thái editor và cùng render backend biên dịch sang desktop gốc, mobile và browser qua WASM — không có các cài đặt lại song song cần đồng bộ.
+- **GPU Skia ở khắp nơi** — gốc dựng hình qua `skia-safe` trên GL context; browser dựng hình qua CanvasKit trên WebGL2 — cùng mã vẽ, cùng đầu ra.
+- **Trợ năng gốc** — AccessKit trên macOS, Windows và Linux, cộng với DOM mirror trên web, thay vì dựa vào cây a11y của browser.
+- **Một workspace có kiểm tra kiểu** — MCP host, CLI, nhà cung cấp AI, tạo mã, nhập Figma và tích hợp Git đều nằm trong một Rust workspace duy nhất, với `cargo-deny` kiểm soát chuỗi cung ứng trong CI.
+
+> **Trạng thái:** editor TypeScript đã bị khai tử tại `v0.7.5` và chỉ còn tồn tại trong lịch sử git; repo này chính là Rust workspace. Sản phẩm Rust đang được phát triển tích cực (xem Lộ trình bên dưới).
 
 ## Cấu trúc dự án
 
 ```text
 openpencil/
-├── apps/
-│   ├── web/                 Ứng dụng web TanStack Start
-│   │   ├── src/
-│   │   │   ├── canvas/      Engine CanvasKit/Skia — vẽ, đồng bộ, layout
-│   │   │   ├── components/  React UI — editor, panels, hộp thoại dùng chung, icons
-│   │   │   ├── services/ai/ AI chat, orchestrator, tạo thiết kế, streaming
-│   │   │   ├── stores/      Zustand — canvas, document, pages, history, AI
-│   │   │   ├── mcp/         Công cụ máy chủ MCP để tích hợp CLI bên ngoài
-│   │   │   ├── hooks/       Phím tắt, kéo thả tệp, dán từ Figma
-│   │   │   └── uikit/       Hệ thống kit component có thể tái sử dụng
-│   │   └── server/
-│   │       ├── api/ai/      Nitro API — streaming chat, generation, validation
-│   │       └── utils/       Claude CLI, OpenCode, Codex, Copilot wrappers
-│   ├── desktop/             Ứng dụng desktop Electron
-│   │   ├── main.ts          Cửa sổ, Nitro fork, menu gốc, auto-updater
-│   │   ├── ipc-handlers.ts  Hộp thoại file gốc, đồng bộ theme, tùy chọn IPC
-│   │   └── preload.ts       IPC bridge
-│   └── cli/                 Công cụ CLI — lệnh `op`
-│       ├── src/commands/    Lệnh design, document, export, import, node, page, variable
-│       ├── connection.ts    Kết nối WebSocket đến ứng dụng đang chạy
-│       └── launcher.ts      Tự động phát hiện và khởi chạy ứng dụng desktop hoặc web server
-├── packages/
-│   ├── pen-types/           Định nghĩa kiểu cho mô hình PenDocument
-│   ├── pen-core/            Thao tác cây tài liệu, layout engine, biến
-│   ├── pen-codegen/         Bộ tạo mã (React, HTML, Vue, Flutter, ...)
-│   ├── pen-figma/           Trình phân tích và chuyển đổi tệp Figma .fig
-│   ├── pen-renderer/        Bộ dựng hình CanvasKit/Skia độc lập
-│   ├── pen-sdk/             SDK tổng hợp (tái xuất tất cả các gói)
-│   ├── pen-ai-skills/       Engine kỹ năng AI prompt (tải prompt theo giai đoạn)
-│   └── agent/               SDK tác nhân AI (Vercel AI SDK, đa nhà cung cấp, đội tác nhân)
-└── .githooks/               Pre-commit đồng bộ phiên bản từ tên nhánh
+├── crates/                   Rust workspace — sản phẩm chính
+│   ├── op-editor-core/       Trạng thái editor `.op` (PenDocument) chuẩn + EditorCommand + biến thiết kế
+│   ├── op-editor-ui/         Widget không phụ thuộc nền tảng + RenderBackend facade (wasm32-clean)
+│   ├── op-editor-host-core/  Máy trạng thái host không phụ thuộc transport, dùng chung cho mọi host
+│   ├── op-host-native/       Thư viện host gốc — winit + skia-safe GL (desktop + mobile)
+│   ├── op-host-web/          Bundle trình duyệt — wasm32 cdylib, renderer CanvasKit
+│   ├── op-host-desktop/      Binary desktop `openpencil-desktop`; đồng thời là daemon `--serve-web`
+│   ├── op-host-services/     Thư viện daemon serve-web / MCP headless
+│   ├── op-host-web-server/   Binary web-server không cần GL
+│   ├── op-cli/               Công cụ CLI — lệnh `op`
+│   ├── op-mcp/               Máy chủ MCP — công cụ, batch design, quy trình phân lớp
+│   ├── op-ai/                Nhà cung cấp AI, runtime chat, streaming
+│   ├── op-ai-skills/         Engine kỹ năng AI prompt (tải prompt theo giai đoạn)
+│   ├── op-orchestrator/      Điều phối đội tác nhân đồng thời
+│   ├── op-codegen/           Bộ tạo mã (React, HTML, Vue, Flutter, ...)
+│   ├── op-figma/             Trình phân tích và chuyển đổi tệp Figma .fig
+│   ├── op-git/               Tích hợp Git — clone, branch, push/pull, merge
+│   └── ...                   op-opmerge / op-pen-loader / op-design-lint / op-i18n /
+│                             op-config-store / op-process-io / op-acp / op-smoke / ...
+├── packages/                 Web SDK workspace (Bun)
+│   ├── op-web-sdk/           SDK trình xem web `.op` chỉ đọc (bọc bundle wasm)
+│   ├── op-web-sdk-react/     Adapter React 19
+│   └── op-web-sdk-vue/       Adapter Vue 3
+├── vendor/                   Các subsystem được vendor hóa (git submodules)
+│   ├── jian/                 Framework UI GPU-Skia — widget/render/event
+│   ├── casement/             Bản fork của winit
+│   └── agent/                Runtime tác nhân Rust đa sản phẩm (agent-rs)
+└── .githooks/                Kiểm tra độ lệch phiên bản trước commit
 ```
 
 ## Phím tắt
@@ -356,15 +483,23 @@ openpencil/
 ## Scripts
 
 ```bash
-bun --bun run dev          # Máy chủ phát triển (cổng 3000)
-bun --bun run build        # Build production
-bun --bun run test         # Chạy kiểm thử (Vitest)
-npx tsc --noEmit           # Kiểm tra kiểu
-bun run bump <version>     # Đồng bộ phiên bản trên tất cả package.json
-bun run electron:dev       # Electron dev
-bun run electron:build     # Đóng gói Electron
-bun run cli:dev            # Chạy CLI từ mã nguồn
-bun run cli:compile        # Biên dịch CLI sang dist
+# Product (Rust — run from the repo root)
+cargo build --workspace              # Build all crates (add --release for prod)
+cargo test --workspace               # Run all tests
+cargo check --workspace              # Type check
+cargo clippy --workspace --all-targets -- -D warnings   # Lint
+cargo fmt --all                      # Format
+bash scripts/start-web-rust.sh       # Web dev server (wasm bundle + headless host)
+cargo run -p op-host-desktop         # Desktop app (binary: openpencil-desktop)
+cargo run -p op-cli -- <args>        # CLI (binary: op)
+
+# Web SDK / JS tooling (run from packages/)
+cd packages && bun run lint          # Lint the web SDK (oxlint); also: bun run format
+cd packages && bun run generate-iconify-catalog   # Regenerate the Rust icon catalog assets
+
+# Đồng bộ phiên bản (chạy từ thư mục gốc của kho mã)
+scripts/sync-version.sh                            # Sync all managed versions from root Cargo.toml
+tools/check-version-sync.sh                        # Verify all managed versions match root Cargo.toml
 ```
 
 ## Đóng góp
@@ -372,9 +507,9 @@ bun run cli:compile        # Biên dịch CLI sang dist
 Chào mừng đóng góp! Xem [CLAUDE.md](./CLAUDE.md) để biết chi tiết về kiến trúc và phong cách mã.
 
 1. Fork và clone
-2. Thiết lập đồng bộ phiên bản: `git config core.hooksPath .githooks`
+2. Bật kiểm tra độ lệch phiên bản: `git config core.hooksPath .githooks`
 3. Tạo branch: `git checkout -b feat/my-feature`
-4. Chạy kiểm tra: `npx tsc --noEmit && bun --bun run test`
+4. Chạy kiểm tra: `cargo test --workspace && cargo clippy --workspace --all-targets -- -D warnings`
 5. Commit theo [Conventional Commits](https://www.conventionalcommits.org/): `feat(canvas): add rotation snapping`
 6. Mở PR vào nhánh `main`
 
@@ -388,13 +523,20 @@ Chào mừng đóng góp! Xem [CLAUDE.md](./CLAUDE.md) để biết chi tiết v
 - [x] Nhập Figma `.fig`
 - [x] Phép toán Boolean (hợp nhất, trừ, giao)
 - [x] Hồ sơ năng lực đa mô hình
-- [x] Tái cấu trúc monorepo với các gói tái sử dụng
+- [x] Workspace Cargo với các crate Rust và gói Web SDK có thể tái sử dụng
+- [x] Trình chỉnh sửa Rust cho desktop và Web
 - [x] Công cụ CLI (`op`) điều khiển từ terminal
-- [x] SDK tác nhân AI tích hợp sẵn với hỗ trợ đa nhà cung cấp
+- [x] Rust Agent Runtime tích hợp sẵn với hỗ trợ đa nhà cung cấp
 - [x] i18n — 15 ngôn ngữ
+- [x] Viewer SDK dựa trên wasm cho JavaScript, React và Vue
+- [x] Style Guides với đối sánh theo tag và công cụ MCP
+- [x] Concurrent Agent Teams với khả năng ủy quyền và chỉ báo trên canvas
 - [x] Tích hợp Git (clone, branch, push/pull, merge ba chiều chế độ thư mục)
-- [x] Xuất raster canvas (PNG / JPEG / WEBP / PDF)
-- [ ] Chỉnh sửa cộng tác
+- [x] Xuất canvas (SVG / PNG / JPEG / WEBP / PDF)
+- [x] Chỉnh sửa cộng tác — P2P đã xác thực, relay công khai, và các hub khu vực
+- [x] Bộ trình chiếu — mẫu, người thuyết trình slideshow, và xuất PDF/HTML/PPTX/video
+- [x] Đăng nhập thiết bị và web hosting đa tenant trực tuyến
+- [x] Tiện ích thu thập web Chrome với nhập HTML / browser-snapshot
 - [ ] Hệ thống plugin
 
 ## Người đóng góp
@@ -416,20 +558,21 @@ Cảm ơn **[MrQyun](https://github.com/mrqyun)** — muốn tên mình xuất h
 ## Cộng đồng
 
 <a href="https://discord.gg/h9Fmyy6pVh">
-  <img src="./apps/web/public/logo-discord.svg" alt="Discord" width="16" />
+  <img src="./screenshot/logo-discord.svg" alt="Discord" width="16" />
   <strong> Tham gia Discord của chúng tôi</strong>
 </a>
 — Đặt câu hỏi, chia sẻ thiết kế, đề xuất tính năng.
 
-## Star History
+**Cộng đồng được công nhận: [LINUX DO](https://linux.do/)**
 
-<a href="https://star-history.com/#ZSeven-W/openpencil&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" width="100%" />
- </picture>
-</a>
+## Các thư viện bên thứ ba được fork
+
+Chúng tôi cảm ơn các nhà bảo trì upstream có công việc làm nền tảng cho OpenPencil. Các bản sao này chỉ được duy trì để đáp ứng nhu cầu tích hợp riêng của OpenPencil:
+
+- **[casement](https://github.com/ZSeven-W/casement)** — được fork từ **[winit](https://github.com/rust-windowing/winit)**.
+- **[anthropic-agent-sdk](./vendor/anthropic-agent-sdk)** — được vendor từ **[bartolli/anthropic-agent-sdk](https://github.com/bartolli/anthropic-agent-sdk)** và duy trì dưới dạng fork cục bộ.
+
+Mỗi dự án vẫn tuân theo giấy phép upstream tương ứng.
 
 ## Đánh giá
 

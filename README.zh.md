@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./apps/desktop/build/icon.png" alt="OpenPencil" width="120" />
+  <img src="./crates/op-host-desktop/assets/icon.png" alt="OpenPencil" width="120" />
 </p>
 
 <h1 align="center">OpenPencil</h1>
@@ -16,8 +16,12 @@
 <p align="center">
   <a href="https://github.com/ZSeven-W/openpencil/stargazers"><img src="https://img.shields.io/github/stars/ZSeven-W/openpencil?style=flat&color=cfb537" alt="Stars" /></a>
   <a href="https://github.com/ZSeven-W/openpencil/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ZSeven-W/openpencil?color=64748b" alt="License" /></a>
-  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/ci.yml?branch=main&label=CI" alt="CI" /></a>
-  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/discord/1476517942949580952?label=Discord&logo=discord&logoColor=white&color=5865F2" alt="Discord" /></a>
+  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/rust-check.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/rust-check.yml?label=CI" alt="CI" /></a>
+  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/badge/Discord-Join%20chat-5865F2?logo=discord&logoColor=white" alt="Discord" /></a>
+</p>
+
+<p align="center">
+  <a href="https://trendshift.io/repositories/24088?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-24088" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/24088" alt="ZSeven-W%2Fopenpencil | Trendshift" width="250" height="55" /></a>
 </p>
 
 <br />
@@ -29,11 +33,18 @@
 </p>
 <p align="center"><sub>点击图片观看演示视频</sub></p>
 
-<br />
-
-> **注意：** 另有一个同名的开源项目 — [OpenPencil](https://github.com/open-pencil/open-pencil)，专注于兼容 Figma 的可视化设计与实时协作。本项目专注于 AI 原生的设计转代码工作流。
-
 ## 为什么选择 OpenPencil
+
+<a href="https://fluxionai.world/register?source=github&amp;campaign=github-openpencil&amp;promo=OPENPENCIL" title="Fluxion AI">
+  <img src="./screenshot/fluxion-ai-sponsor-banner.png" alt="Fluxion AI — reliable, cost-efficient access to GPT, Claude, and other leading AI models through one unified API" width="100%" />
+</a>
+
+### [OpenPencil × Fluxion AI｜一个统一 API 接入 GPT、Claude 等主流模型](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL)
+
+感谢 [Fluxion AI](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL) 赞助 OpenPencil！
+
+- ⚡ **稳定、低成本接入：** 通过一个统一 API 稳定调用 GPT、Claude 等主流 AI 模型，价格最高可比官方 API 节省 70%。
+- 🎁 **OpenPencil 用户专属福利：** 通过 [此链接注册](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL) 即可获得 **1 美元 API 额度**。
 
 <table>
 <tr>
@@ -64,7 +75,7 @@
 
 ### 🔌 MCP 服务器
 
-一键安装到 Claude Code、Codex、Gemini、OpenCode、Kiro 或 Copilot CLI。从终端进行设计 — 通过任意 MCP 兼容的智能体读取、创建和修改 `.op` 文件。
+一键安装到 Claude Code、Codex、OpenCode、Kiro 或 Copilot CLI。从终端进行设计 — 通过任意 MCP 兼容的智能体读取、创建和修改 `.op` 文件。
 
 </td>
 </tr>
@@ -80,7 +91,7 @@
 
 ### 🖥️ 全平台运行
 
-Web 应用 + 通过 Electron 支持 macOS、Windows 和 Linux 原生桌面端。从 GitHub Releases 自动更新。`.op` 文件关联 — 双击即可打开。
+Web 应用 + macOS、Windows 和 Linux 原生桌面端 — 单一 Rust 核心，单个自包含二进制文件，无需浏览器引擎。`.op` 文件关联 — 双击即可打开。
 
 </td>
 </tr>
@@ -102,72 +113,128 @@ Web 应用 + 通过 Electron 支持 macOS、Windows 和 Linux 原生桌面端。
 </tr>
 </table>
 
+## 安装
+
+**Windows 源码编译：** 参见 [BUILD_WINDOWS.zh.md](./docs/build_windows/BUILD_WINDOWS.zh.md)
+
+**macOS（Homebrew）：**
+
+```bash
+brew tap zseven-w/openpencil
+brew install --cask openpencil
+```
+
+**Windows（Scoop）：**
+
+```powershell
+scoop bucket add openpencil https://github.com/zseven-w/scoop-openpencil
+scoop install openpencil
+```
+
+**Linux / Windows 直接下载：** [GitHub Releases](https://github.com/ZSeven-W/openpencil/releases) — `.exe`（Windows）、`.AppImage` / `.deb`（Linux）
+
+**Nix（Linux x86_64）：**
+
+```bash
+nix develop
+nix run .                         # 启动桌面应用
+nix build .#openpencil            # 原生 Web host + CanvasKit Web bundle
+nix build .#op-cli                # `op` CLI
+nix build .#prebuilt              # 使用匹配的 upstream 桌面归档
+nix build .#prebuilt-cli          # 使用匹配的 upstream CLI 归档
+nix build .#web-server            # 无需 GL 的原生 Web server + Web bundle
+nix build .#runtime-prebuilt      # 预构建桌面端 + `op` CLI runtime
+nix build .#web-sdk-packages      # Web SDK 的 npm tarball
+nix build .#appimage              # 便携式桌面 AppImage
+```
+
+flake 使用 `rust-toolchain.toml` 中固定的 Rust toolchain，目前发布于
+`x86_64-linux`。flake 尚未生成 Debian 软件包；需要 `.deb` 时请使用
+upstream release artifact。`prebuilt` output 使用
+`nix/release-manifest.json` 中固定的 release 版本和 hash，与 workspace
+源码版本相互独立。release 发布后，release workflow 会创建 PR 来更新此
+manifest。在 PR 合并前，预构建 output 会继续使用上一个已发布的 release；
+源码构建 output 则始终使用当前 checkout 的源码。
+
+**CLI（`op`）：**
+
+```bash
+brew install zseven-w/openpencil/op
+```
+
+或使用安装脚本（macOS / Linux）：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | bash
+```
+
+如需允许最新预发布版本：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | OP_PRERELEASE=1 bash
+```
+
+Windows PowerShell：
+
+```powershell
+irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+如需允许最新预发布版本：
+
+```powershell
+$env:OP_PRERELEASE = "1"; irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+## 克隆（包含子模块）
+
+```bash
+git clone --recurse-submodules https://github.com/ZSeven-W/openpencil.git
+# 如果已经克隆，请先同步，让旧的子模块 URL 获取 .gitmodules 中的更改：
+git submodule sync --recursive && git submodule update --init --recursive
+```
+
+`vendor/` 下有三个子模块，均为公开仓库并通过 HTTPS 获取（无需 SSH 密钥）：`jian`（GPU-Skia UI framework — widget/render/event）、`casement`（winit fork）和 `agent`（`agent-rs` — OP 与 Zode 共用的跨产品 Rust agent runtime）。`vendor/anthropic-agent-sdk` 直接纳入版本控制，并非子模块。
+
 ## 快速开始
 
 ```bash
-# 安装依赖
-bun install
-
-# 在 http://localhost:3000 启动开发服务器
-bun --bun run dev
+# Web dev server (builds the CanvasKit wasm bundle, then runs the headless web host)
+bash scripts/start-web-rust.sh
 ```
 
 或以桌面应用形式运行：
 
 ```bash
-bun run electron:dev
+cargo run -p op-host-desktop
 ```
 
-> **前置条件：** [Bun](https://bun.sh/) >= 1.0 以及 [Node.js](https://nodejs.org/) >= 18
+> **前置条件：** 构建产品需要 [Rust](https://www.rust-lang.org/)（stable）。[Bun](https://bun.sh/) >= 1.0 和 [Node.js](https://nodejs.org/) >= 18 仅用于 `packages/` 下的 web SDK。
 
 ### Docker
 
-提供多个镜像变体 — 按需选择：
+带标签的 Rust release 会发布单一 web-host 镜像。带内置 AI CLI 的旧 TypeScript 镜像不再发布。
 
-| 镜像                         | 大小    | 包含                 |
-| ---------------------------- | ------- | -------------------- |
-| `openpencil:latest`          | ~226 MB | 仅 Web 应用          |
-| `openpencil-claude:latest`   | —       | + Claude Code CLI    |
-| `openpencil-codex:latest`    | —       | + Codex CLI          |
-| `openpencil-opencode:latest` | —       | + OpenCode CLI       |
-| `openpencil-copilot:latest`  | —       | + GitHub Copilot CLI |
-| `openpencil-gemini:latest`   | —       | + Gemini CLI         |
-| `openpencil-full:latest`     | ~1 GB   | 全部 CLI 工具        |
+| 镜像 | 包含 |
+| --- | --- |
+| `ghcr.io/zseven-w/openpencil-web:vX.Y.Z` | Rust web host、wasm bundle 和 CanvasKit 资源 |
 
-**运行（仅 Web）：**
+Web UI 只暴露内置 agent profiles；Docker 镜像不再内置 Claude/Codex/OpenCode/Copilot CLI 工具。
+
+**运行：**
 
 ```bash
-docker run -d -p 3000:3000 ghcr.io/zseven-w/openpencil:latest
+VERSION="$(scripts/workspace-version.sh)"
+docker run -d -p 3100:3100 "ghcr.io/zseven-w/openpencil-web:v${VERSION}"
 ```
 
-**运行 AI CLI（以 Claude Code 为例）：**
-
-AI 聊天依赖 Claude CLI 的 OAuth 登录。使用 Docker volume 持久化登录会话：
-
-```bash
-# 第一步 — 登录（仅需一次）
-docker volume create openpencil-claude-auth
-docker run -it --rm \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest claude login
-
-# 第二步 — 启动
-docker run -d -p 3000:3000 \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest
-```
+然后打开 `http://localhost:3100/`。
 
 **本地构建：**
 
 ```bash
-# 基础版（仅 Web）
-docker build --target base -t openpencil .
-
-# 指定 CLI
-docker build --target with-claude -t openpencil-claude .
-
-# 完整版（全部 CLI）
-docker build --target full -t openpencil-full .
+docker build -f Dockerfile.web-rust -t openpencil-web-rust .
+docker run -p 3100:3100 openpencil-web-rust
 ```
 
 ## AI 原生设计
@@ -188,7 +255,6 @@ docker build --target full -t openpencil-full .
 | **Codex CLI**         | 在 Agent 设置中连接（`Cmd+,`）                                        |
 | **OpenCode**          | 在 Agent 设置中连接（`Cmd+,`）                                        |
 | **GitHub Copilot**    | 运行 `copilot login` 后在 Agent 设置中连接（`Cmd+,`）                 |
-| **Gemini CLI**        | 在 Agent 设置中连接（`Cmd+,`）                                        |
 
 **模型能力配置** — 自动根据模型层级适配提示词、思考模式和超时时间。完整层级模型（Claude）获得完整提示词；标准层级模型（GPT-4o、Gemini、DeepSeek）关闭思考模式；基础层级模型（MiniMax、Qwen、Llama、Mistral）使用简化的嵌套 JSON 提示词以确保最大可靠性。
 
@@ -196,8 +262,8 @@ docker build --target full -t openpencil-full .
 
 **MCP 服务器**
 
-- 内置 MCP 服务器 — 一键安装到 Claude Code / Codex / Gemini / OpenCode / Kiro / Copilot CLI
-- 自动检测 Node.js — 若未安装则自动回退到 HTTP 传输模式并启动 MCP HTTP 服务器
+- 内置 MCP 服务器（`op-mcp` crate）— 一键安装到 Claude Code / Codex / OpenCode / Kiro / Copilot CLI
+- 无需 Node.js — 通过桌面应用二进制文件（`--mcp <path>`）使用 stdio 传输，运行中的应用还提供实时 HTTP 端点（`127.0.0.1:<port>/mcp`）
 - 从终端进行设计自动化：通过任意 MCP 兼容的智能体读取、创建和修改 `.op` 文件
 - **分层设计工作流** — `design_skeleton` → `design_content` → `design_refine`，实现更高保真度的多区块设计
 - **分段提示词检索** — 按需加载所需的设计知识（schema、layout、roles、icons、planning 等）
@@ -213,20 +279,22 @@ docker build --target full -t openpencil-full .
 全局安装后即可从终端控制设计工具：
 
 ```bash
-npm install -g @zseven-w/openpencil
+brew install zseven-w/openpencil/op
 ```
 
 ```bash
 op start                     # 启动桌面应用
+op start --headless --file design.op # 启动无头服务器
 op design @landing.txt       # 从文件批量设计
-op insert '{"type":"RECT"}'  # 插入节点
+op design @ui.js             # 支持循环的沙箱 JavaScript
+op insert '{"type":"rectangle"}' # 插入节点
 op import:figma design.fig   # 导入 Figma 文件
 cat design.dsl | op design - # 从 stdin 管道输入
 ```
 
-支持三种输入方式：内联字符串、`@filepath`（从文件读取）、`-`（从 stdin 读取）。可搭配桌面应用或 Web 开发服务器使用。完整命令参考请查阅 [CLI README](./apps/cli/README.md)。
+支持内联字符串、`@filepath` 与 stdin（`-`），可搭配桌面应用、Web 服务器或文件型无头服务器使用。所有命令请查阅 [CLI 命令参考](./crates/op-cli/src/usage.txt)。
 
-**LLM 技能** — 安装 [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill) 插件，教 AI 智能体（Claude Code、Cursor、Codex、Gemini CLI 等）使用 `op` 进行设计。
+**LLM 技能** — 安装 [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill) 插件，教 AI 智能体使用 `op` 进行设计。可运行 `op install` 为检测到的 Agent 安装，或使用 `op install --target codex` 指定目标。
 
 ## 功能特性
 
@@ -254,8 +322,30 @@ cat design.dsl | op design - # 从 stdin 管道输入
 - 分层工作流 — `design_skeleton` → `design_content` → `design_refine`，每个阶段使用聚焦的提示词
 - 风格指南 — 50+ 内置风格（glassmorphism、brutalist、retro 等），支持基于标签的模糊匹配，并接入规划与生成流程
 - 多模型能力配置 — 按模型层级自动适配思考模式、推理强度与提示词形态
-- 内置智能体运行时（`agent-native`，Zig NAPI）+ Anthropic、Claude Agent SDK、OpenCode、Codex、Copilot、Gemini 提供商
+- 内置智能体运行时（Rust）+ Anthropic、Claude Agent SDK、OpenCode、Codex、Copilot、Google Gemini API 提供商
 - 国产大模型 Anthropic 格式透传 — Kimi、Zhipu、GLM、DouBao、Ark、Bailian/DashScope、ModelScope、Coding Plans
+
+**协同**
+
+- 经过身份验证的点对点会话，支持公共中继回退与内置的区域协作 Hub
+- 使用 10 位带区域标签的配对码加入 — 局域网会话无需账户
+- 实时远程光标、跨账户协同，以及带逐条编辑详情和可回放已丢弃编辑的冲突面板
+- `--serve-web` 守护进程的在线多租户模式，向 op-hub 进行身份验证并支持跨账户租户共享
+- 设备登录 — 通过 serve-web 守护进程从浏览器登录，编辑器中显示头像与用户名
+
+**演示文稿**
+
+- 六个 16:9 演示文稿模板，配备模板选择器，另有投影仪尺寸的 AI 演示文稿规划 — 一屏一张幻灯片
+- 以幻灯片放映方式演示演示文稿，配有演讲者控制
+- 将演示文稿导出为 PDF（每张幻灯片一页）、自包含的幻灯片放映 HTML 文件、可编辑的 PowerPoint（`.pptx`），或 hyperframes 视频合成
+- 幻灯片轨道导航器；Agent 会验证演示文稿画板的几何（宽高比、溢出、居中）以及提示词
+
+**模板与网页捕获**
+
+- 场景模板中心 — 一个可浏览的目录，涵盖六大场景下的 58 个模板，从「文件 ▸ 从模板新建」打开
+- 提示词中心，包含 web、仪表盘、组件与修改条目及可视化提示词预览
+- 素材中心 — 全窗口响应式画廊，配有双动作模板与 DESIGN.md 风格导入
+- [Chrome 网页捕获扩展](https://chromewebstore.google.com/detail/openpencil/ahfofgelkdaobcmglejmjbpnajhpgcij) — 将任意网页快照到 OpenPencil，支持高保真的 HTML / 布局捕获；快照会送达你账户在 hub 上的收件箱，或在离线时下载为一个可直接打开的 `.op` 文件
 
 **Git 集成**
 
@@ -278,9 +368,9 @@ cat design.dsl | op design - # 从 stdin 管道输入
 
 **桌面应用**
 
-- 通过 Electron 支持原生 macOS、Windows 和 Linux
+- 原生支持 macOS、Windows 和 Linux — 单一自包含二进制文件（winit + GPU Skia，无需 Electron）
 - `.op` 文件关联 — 双击即可打开，单实例锁定
-- 从 GitHub Releases 自动更新
+- 后台检查 GitHub Releases 更新
 - 原生应用菜单，支持另存为、打开最近使用，以及关闭时的未保存更改对话框
 - 最近使用文件持久化
 
@@ -288,51 +378,87 @@ cat design.dsl | op design - # 从 stdin 管道输入
 
 |              |                                                                                  |
 | ------------ | -------------------------------------------------------------------------------- |
-| **前端**     | React 19 · TanStack Start · Tailwind CSS v4 · shadcn/ui · i18next                |
-| **画布**     | CanvasKit/Skia（WASM, GPU 加速）                                                 |
-| **状态管理** | Zustand v5                                                                       |
-| **服务器**   | Nitro                                                                            |
-| **桌面端**   | Electron 35                                                                      |
+| **核心**     | Rust workspace（`crates/`）— 编辑器状态、组件、宿主、MCP、AI、代码生成           |
+| **渲染**     | 全平台统一使用 GPU Skia — 原生端 `skia-safe`（GL），浏览器端 CanvasKit（WASM/WebGL2） |
+| **UI 框架** | jian — 内置的纯 Rust GPU-Skia UI 框架：组件、布局、事件、热重载（`vendor/jian`） |
+| **窗口管理** | winit（内置 `casement` fork）                                                    |
+| **桌面端**   | 原生二进制文件 `openpencil-desktop` — 无浏览器引擎                              |
+| **Web SDK**  | `op-web-sdk` + React 19 / Vue 3 适配器 — 只读 `.op` 查看器（TypeScript）         |
 | **CLI**      | `op` — 终端控制、批量设计 DSL                                                    |
-| **AI**       | Vercel AI SDK v6 · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
-| **运行时**   | Bun · Vite 7                                                                     |
+| **AI**       | 内置 Rust Agent 运行时 · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
+| **代码检查** | clippy · rustfmt（Rust）· oxlint · oxfmt（web SDK）                              |
 | **文件格式** | `.op` — 基于 JSON，人类可读，对 Git 友好                                         |
+
+## 生态
+
+OpenPencil 是 **[ZSeven-W](https://github.com/ZSeven-W)** 出品的一系列纯 Rust、AI 原生工具家族中的一员。它们彼此协作：`jian` 渲染 OpenPencil，`agent-rs` 运行它的智能体，`noema` 负责记忆，`zode` 则从终端进行设计。
+
+| 项目 | 简介 |
+| ---- | ---- |
+| **[DSH OpenPencil](https://github.com/ZSeven-W/dsh-openpencil)** | OpenPencil 的 DeepSeek Harness 插件 — 在对话中提供精确的多画板 `.op` 预览、可交互画布，以及带智能体原生设计工具的托管编辑器。 |
+| **[Zode](https://github.com/ZSeven-W/zode)** | 面向终端的开源、AI 原生编程助手 — 一个快速的 Rust TUI（`ratatui`），可读取你的代码、运行命令、搜索文件并管理 git。通过 MCP 驱动 OpenPencil。 |
+| **[agent-rs](https://github.com/ZSeven-W/agent-rs)** | 用于交付 LLM 智能体的纯 Rust 异步运行时 — 多提供商、端到端工具能力、结构化权限、真正的 MCP、零 `unsafe`。为 OpenPencil 内置的智能体运行时（`vendor/agent`）和 Zode 提供动力。 |
+| **[jian](https://github.com/ZSeven-W/jian)** | 纯 Rust、GPU-Skia UI 框架 — 组件、布局、事件和热重载集于一栈。将声明式的 `.op` 文档变为原生、AI 可控的应用，无需 JS 运行时、无 DOM、无 Electron。OpenPencil 的 UI 框架（`vendor/jian`）。 |
+| **[noema](https://github.com/ZSeven-W/noema)** | 面向编程智能体的本地优先、非向量记忆系统。以可检视的文件形式提供持久记忆、为新条目提供审阅队列，以及词法式（无需嵌入）召回 — 适用于 Zode、Codex、Claude Code 和 MCP 运行时。 |
+
+## 为什么选择 Rust
+
+OpenPencil 已从头用 **Rust** 完成重写（[#129](https://github.com/ZSeven-W/openpencil/issues/129)）。重写已经完成 — TypeScript + Electron 版编辑器已在 `v0.7.5` 退役，本仓库中的 Rust workspace 就是当前产品本身：一个体积更小、速度更快的原生核心，从单一代码库支持更多平台。
+
+|                   | TypeScript + Electron（已退役，`v0.7.5`）  | Rust（当前）                                                             |
+| ----------------- | ------------------------------------------ | ----------------------------------------------------------------------- |
+| **桌面运行时**    | Electron — 内置 Chromium + Node.js         | 原生窗口（`winit` + GPU Skia），无浏览器引擎                             |
+| **桌面体积**      | 每次安装均含完整 Chromium 运行时           | 单一自包含二进制文件 — **55.5 MB**                                       |
+| **Web 包体积**    | JS + WASM 包                               | **8.2 MB** wasm / 传输 **2.18 MB** gzip                                 |
+| **渲染**          | Web 端 CanvasKit/Skia                      | **所有**目标平台统一使用 GPU 加速 Skia 后端                              |
+| **内存**          | JavaScript GC 暂停                         | 无 GC — Rust 所有权，延迟可预期                                          |
+| **代码库**        | Web 技术栈 + Electron     | 单一 Rust workspace：editor · CLI · MCP · AI · codegen · Figma · Git    |
+| **目标平台**      | Web + 桌面，两套独立技术栈                 | 桌面（macOS/Win/Linux）· 移动端（iOS/Android）· 浏览器 — 共用同一核心   |
+
+**可量化的性能提升**
+
+- **极小体积** — 整个桌面应用是一个 **55.5 MB** 的原生二进制文件，而非捆绑浏览器引擎和 Node.js 运行时。拆分图标目录后，Web 构建产物为 **8.2 MB** 原始 / **2.18 MB** gzip（传输体积 −48%）。
+- **大文档扩展性** — **10,000-node** 实时画布（嵌套四层自动布局）在写入、读取和快照布局时**不崩溃、空闲 CPU 约为 ~0%**；对全部 10k 节点执行完整布局快照仅需 **~0.68 s**。
+- **流畅交互** — 平移/缩放不再在每一帧都重新序列化文档（单个热路径修复将滚轮缩放 CPU 占用从 **~69% 降至 ~0%**）；拖拽增量更新场景图，文本测量结果已缓存，重绘合并为每帧一次。
+- **一套核心，全端覆盖** — 相同的编辑器状态和渲染后端，可编译为原生桌面、移动端，以及通过 WASM 运行的浏览器端 — 无需维护多套并行实现。
+- **GPU Skia 全覆盖** — 原生端通过 `skia-safe` 在 GL 上下文上渲染；浏览器端通过 CanvasKit 在 WebGL2 上渲染 — 同一套绘图代码，同一套输出结果。
+- **原生无障碍** — macOS、Windows 和 Linux 上通过 AccessKit 实现，Web 端通过 DOM 镜像实现，而非依赖浏览器自身的无障碍树。
+- **单一类型检查工作区** — MCP 宿主、CLI、AI 提供商、代码生成、Figma 导入和 Git 集成全部位于同一个 Rust workspace，并在 CI 中通过 `cargo-deny` 进行供应链管控。
+
+> **状态：** TypeScript 版编辑器已在 `v0.7.5` 退役，仅存在于 Git 历史中；本仓库即为 Rust workspace。Rust 产品正在积极开发中（参见下方路线图）。
 
 ## 项目结构
 
 ```text
 openpencil/
-├── apps/
-│   ├── web/                 TanStack Start Web 应用
-│   │   ├── src/
-│   │   │   ├── canvas/      CanvasKit/Skia 引擎 — 绘图、同步、布局
-│   │   │   ├── components/  React UI — 编辑器、面板、共享对话框、图标
-│   │   │   ├── services/ai/ AI 聊天、编排器、设计生成、流式处理
-│   │   │   ├── stores/      Zustand — 画布、文档、页面、历史、AI
-│   │   │   ├── mcp/         供外部 CLI 集成使用的 MCP 服务器工具
-│   │   │   ├── hooks/       键盘快捷键、文件拖放、Figma 粘贴
-│   │   │   └── uikit/       可复用组件套件系统
-│   │   └── server/
-│   │       ├── api/ai/      Nitro API — 流式聊天、生成、验证
-│   │       └── utils/       Claude CLI、OpenCode、Codex、Copilot 客户端封装
-│   ├── desktop/             Electron 桌面应用
-│   │   ├── main.ts          窗口、Nitro 子进程、原生菜单、自动更新
-│   │   ├── ipc-handlers.ts  原生文件对话框、主题同步、偏好设置 IPC
-│   │   └── preload.ts       IPC 桥接
-│   └── cli/                 CLI 工具 — `op` 命令
-│       ├── src/commands/    设计、文档、导出、导入、节点、页面、变量命令
-│       ├── connection.ts    与运行中应用的 WebSocket 连接
-│       └── launcher.ts      自动检测并启动桌面应用或 Web 服务器
-├── packages/
-│   ├── pen-types/           PenDocument 模型类型定义
-│   ├── pen-core/            文档树操作、布局引擎、变量
-│   ├── pen-codegen/         代码生成器（React、HTML、Vue、Flutter 等）
-│   ├── pen-figma/           Figma .fig 文件解析与转换
-│   ├── pen-renderer/        独立 CanvasKit/Skia 渲染器
-│   ├── pen-sdk/             聚合 SDK（重新导出所有包）
-│   ├── pen-ai-skills/       AI 提示词技能引擎（分阶段 prompt 加载）
-│   └── agent/               AI Agent SDK（Vercel AI SDK、多提供商、Agent 团队）
-└── .githooks/               预提交钩子：从分支名同步版本号
+├── crates/                   Rust workspace — 产品本体
+│   ├── op-editor-core/       规范的 `.op`（PenDocument）编辑器状态 + EditorCommand + 设计变量
+│   ├── op-editor-ui/         平台无关组件 + RenderBackend 门面（wasm32 兼容）
+│   ├── op-editor-host-core/  所有宿主共用、与传输层无关的宿主状态机
+│   ├── op-host-native/       原生宿主库 — winit + skia-safe GL（桌面端 + 移动端）
+│   ├── op-host-web/          浏览器构建产物 — wasm32 cdylib，CanvasKit 渲染器
+│   ├── op-host-desktop/      桌面应用二进制 `openpencil-desktop`；同时也是 `--serve-web` 守护进程
+│   ├── op-host-services/     无头 serve-web / MCP 守护进程库
+│   ├── op-host-web-server/   无 GL 依赖的轻量级 Web 服务器二进制
+│   ├── op-cli/               CLI 工具 — `op` 命令
+│   ├── op-mcp/               MCP 服务器 — 工具、批量设计、分层工作流
+│   ├── op-ai/                AI 提供商、聊天运行时、流式处理
+│   ├── op-ai-skills/         AI 提示词技能引擎（分阶段 prompt 加载）
+│   ├── op-orchestrator/      并发 Agent 团队编排
+│   ├── op-codegen/           代码生成器（React、HTML、Vue、Flutter 等）
+│   ├── op-figma/             Figma .fig 文件解析器与转换器
+│   ├── op-git/               Git 集成 — 克隆、分支、推送/拉取、合并
+│   └── ...                   op-opmerge / op-pen-loader / op-design-lint / op-i18n /
+│                             op-config-store / op-process-io / op-acp / op-smoke / ...
+├── packages/                 Web SDK 工作区（Bun）
+│   ├── op-web-sdk/           只读 `.op` Web 查看器 SDK（封装 wasm 构建产物）
+│   ├── op-web-sdk-react/     React 19 适配器
+│   └── op-web-sdk-vue/       Vue 3 适配器
+├── vendor/                   内置子系统（git 子模块）
+│   ├── jian/                 GPU-Skia UI 框架 — 组件/渲染/事件
+│   ├── casement/             winit fork
+│   └── agent/                跨产品 Rust Agent 运行时（agent-rs）
+└── .githooks/                预提交版本漂移检查
 ```
 
 ## 键盘快捷键
@@ -356,15 +482,23 @@ openpencil/
 ## 脚本命令
 
 ```bash
-bun --bun run dev          # 开发服务器（端口 3000）
-bun --bun run build        # 生产构建
-bun --bun run test         # 运行测试（Vitest）
-npx tsc --noEmit           # 类型检查
-bun run bump <version>     # 同步所有 package.json 的版本号
-bun run electron:dev       # Electron 开发模式
-bun run electron:build     # Electron 打包
-bun run cli:dev            # 从源码运行 CLI
-bun run cli:compile        # 编译 CLI 到 dist
+# Product (Rust — run from the repo root)
+cargo build --workspace              # Build all crates (add --release for prod)
+cargo test --workspace               # Run all tests
+cargo check --workspace              # Type check
+cargo clippy --workspace --all-targets -- -D warnings   # Lint
+cargo fmt --all                      # Format
+bash scripts/start-web-rust.sh       # Web dev server (wasm bundle + headless host)
+cargo run -p op-host-desktop         # Desktop app (binary: openpencil-desktop)
+cargo run -p op-cli -- <args>        # CLI (binary: op)
+
+# Web SDK / JS tooling (run from packages/)
+cd packages && bun run lint          # Lint the web SDK (oxlint); also: bun run format
+cd packages && bun run generate-iconify-catalog   # Regenerate the Rust icon catalog assets
+
+# 版本同步（从仓库根目录运行）
+scripts/sync-version.sh                            # Sync all managed versions from root Cargo.toml
+tools/check-version-sync.sh                        # Verify all managed versions match root Cargo.toml
 ```
 
 ## 参与贡献
@@ -372,9 +506,9 @@ bun run cli:compile        # 编译 CLI 到 dist
 欢迎贡献！请查阅 [CLAUDE.md](./CLAUDE.md) 了解架构细节和代码风格。
 
 1. Fork 并克隆仓库
-2. 设置版本同步：`git config core.hooksPath .githooks`
+2. 启用版本漂移检查：`git config core.hooksPath .githooks`
 3. 创建分支：`git checkout -b feat/my-feature`
-4. 运行检查：`npx tsc --noEmit && bun --bun run test`
+4. 运行检查：`cargo test --workspace && cargo clippy --workspace --all-targets -- -D warnings`
 5. 使用 [Conventional Commits](https://www.conventionalcommits.org/) 提交：`feat(canvas): add rotation snapping`
 6. 向 `main` 分支发起 PR
 
@@ -388,13 +522,20 @@ bun run cli:compile        # 编译 CLI 到 dist
 - [x] Figma `.fig` 导入
 - [x] 布尔运算（合并、减去、相交）
 - [x] 多模型能力配置
-- [x] Monorepo 重构与可复用包
+- [x] Cargo workspace，包含可复用的 Rust crate 和 Web SDK 包
+- [x] Rust 桌面端与 Web 端编辑器
 - [x] CLI 工具（`op`）终端控制
-- [x] 内置 AI Agent SDK，支持多提供商
+- [x] 内置 Rust Agent Runtime，支持多提供商
 - [x] 国际化 — 15 种语言
+- [x] 基于 wasm 的 JavaScript、React 与 Vue Viewer SDK
+- [x] Style Guides，支持基于标签的匹配和 MCP 工具
+- [x] Concurrent Agent Teams，支持任务委派和画布状态指示
 - [x] Git 集成（克隆、分支、推送/拉取、文件夹模式三路合并）
-- [x] 画布栅格导出（PNG / JPEG / WEBP / PDF）
-- [ ] 协同编辑
+- [x] 画布导出（SVG / PNG / JPEG / WEBP / PDF）
+- [x] 协同编辑 — 经过身份验证的 P2P、公共中继与区域 Hub
+- [x] 演示文稿 — 模板、幻灯片放映演讲者，以及 PDF/HTML/PPTX/视频导出
+- [x] 设备登录与在线多租户 Web 托管
+- [x] Chrome 网页捕获扩展，支持 HTML / 浏览器快照导入
 - [ ] 插件系统
 
 ## 贡献者
@@ -416,7 +557,7 @@ OpenPencil 免费开源,开发完全由觉得它好用的人们资助 —— 感
 ## 社区
 
 <a href="https://discord.gg/h9Fmyy6pVh">
-  <img src="./apps/web/public/logo-discord.svg" alt="Discord" width="16" />
+  <img src="./screenshot/logo-discord.svg" alt="Discord" width="16" />
   <strong> 加入我们的 Discord</strong>
 </a>
 — 提问、分享设计、提出功能建议。
@@ -425,15 +566,16 @@ OpenPencil 免费开源,开发完全由觉得它好用的人们资助 —— 感
 
 <img src="./screenshot/557517811-62010928-d91a-4223-bc10-9ee7a4fbf043.jpg" alt="飞书交流群" width="240" />
 
-## Star History
+**认可社区：[LINUX DO](https://linux.do/)**
 
-<a href="https://star-history.com/#ZSeven-W/openpencil&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" width="100%" />
- </picture>
-</a>
+## 第三方 Fork 与致谢
+
+感谢上游维护者的工作，OpenPencil 得以在此基础上构建。以下副本仅为满足 OpenPencil 特定的集成需求而维护：
+
+- **[casement](https://github.com/ZSeven-W/casement)** — fork 自 **[winit](https://github.com/rust-windowing/winit)**。
+- **[anthropic-agent-sdk](./vendor/anthropic-agent-sdk)** — 从 **[bartolli/anthropic-agent-sdk](https://github.com/bartolli/anthropic-agent-sdk)** 引入仓库，并作为本地 fork 维护。
+
+各项目仍适用其各自的上游许可证。
 
 ## 安全评估
 

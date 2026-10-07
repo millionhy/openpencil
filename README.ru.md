@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./apps/desktop/build/icon.png" alt="OpenPencil" width="120" />
+  <img src="./crates/op-host-desktop/assets/icon.png" alt="OpenPencil" width="120" />
 </p>
 
 <h1 align="center">OpenPencil</h1>
@@ -16,8 +16,12 @@
 <p align="center">
   <a href="https://github.com/ZSeven-W/openpencil/stargazers"><img src="https://img.shields.io/github/stars/ZSeven-W/openpencil?style=flat&color=cfb537" alt="Stars" /></a>
   <a href="https://github.com/ZSeven-W/openpencil/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ZSeven-W/openpencil?color=64748b" alt="License" /></a>
-  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/ci.yml?branch=main&label=CI" alt="CI" /></a>
-  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/discord/1476517942949580952?label=Discord&logo=discord&logoColor=white&color=5865F2" alt="Discord" /></a>
+  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/rust-check.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/rust-check.yml?label=CI" alt="CI" /></a>
+  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/badge/Discord-Join%20chat-5865F2?logo=discord&logoColor=white" alt="Discord" /></a>
+</p>
+
+<p align="center">
+  <a href="https://trendshift.io/repositories/24088?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-24088" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/24088" alt="ZSeven-W%2Fopenpencil | Trendshift" width="250" height="55" /></a>
 </p>
 
 <br />
@@ -29,11 +33,18 @@
 </p>
 <p align="center"><sub>Нажмите на изображение, чтобы посмотреть демо-видео</sub></p>
 
-<br />
-
-> **Примечание:** Существует другой проект с открытым исходным кодом с таким же названием — [OpenPencil](https://github.com/open-pencil/open-pencil), ориентированный на визуальный дизайн, совместимый с Figma, с совместной работой в реальном времени. Этот проект ориентирован на AI-нативные рабочие процессы «дизайн в код».
-
 ## Почему OpenPencil
+
+<a href="https://fluxionai.world/register?source=github&amp;campaign=github-openpencil&amp;promo=OPENPENCIL" title="Fluxion AI">
+  <img src="./screenshot/fluxion-ai-sponsor-banner.png" alt="Fluxion AI — reliable, cost-efficient access to GPT, Claude, and other leading AI models through one unified API" width="100%" />
+</a>
+
+### [OpenPencil × Fluxion AI | One unified API for GPT, Claude, and more](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL)
+
+Thanks to [Fluxion AI](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL) for sponsoring OpenPencil!
+
+- ⚡ **Reliable, cost-efficient access:** GPT, Claude, and other leading AI models through one unified API — save up to 70% compared with official API pricing.
+- 🎁 **OpenPencil user bonus:** get **$1 in API credits** when you [sign up through this link](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL).
 
 <table>
 <tr>
@@ -64,7 +75,7 @@
 
 ### 🔌 MCP-сервер
 
-Установка в один клик в Claude Code, Codex, Gemini, OpenCode, Kiro или Copilot CLI. Дизайн из терминала — чтение, создание и изменение файлов `.op` через любой MCP-совместимый агент.
+Установка в один клик в Claude Code, Codex, OpenCode, Kiro или Copilot CLI. Дизайн из терминала — чтение, создание и изменение файлов `.op` через любой MCP-совместимый агент.
 
 </td>
 </tr>
@@ -80,7 +91,7 @@
 
 ### 🖥️ Работает везде
 
-Веб-приложение + нативный десктоп на macOS, Windows и Linux через Electron. Автообновление из GitHub Releases. Ассоциация файлов `.op` — двойной клик для открытия.
+Веб-приложение + нативный десктоп на macOS, Windows и Linux — единое Rust-ядро, один самодостаточный бинарный файл, без браузерного движка. Ассоциация файлов `.op` — двойной клик для открытия.
 
 </td>
 </tr>
@@ -102,72 +113,129 @@
 </tr>
 </table>
 
+## Установка
+
+**Сборка на Windows:** [BUILD_WINDOWS.ru.md](./docs/build_windows/BUILD_WINDOWS.ru.md)
+
+**macOS (Homebrew):**
+
+```bash
+brew tap zseven-w/openpencil
+brew install --cask openpencil
+```
+
+**Windows (Scoop):**
+
+```powershell
+scoop bucket add openpencil https://github.com/zseven-w/scoop-openpencil
+scoop install openpencil
+```
+
+**Прямая загрузка для Linux / Windows:** [GitHub Releases](https://github.com/ZSeven-W/openpencil/releases) — `.exe` (Windows), `.AppImage` / `.deb` (Linux)
+
+**Nix (Linux x86_64):**
+
+```bash
+nix develop
+nix run .                         # запустить десктопное приложение
+nix build .#openpencil            # нативный web host + CanvasKit web bundle
+nix build .#op-cli                # CLI `op`
+nix build .#prebuilt              # использовать соответствующий upstream-архив десктопа
+nix build .#prebuilt-cli          # использовать соответствующий upstream-архив CLI
+nix build .#web-server            # нативный web server без GL + web bundle
+nix build .#runtime-prebuilt      # готовый runtime десктопа + CLI `op`
+nix build .#web-sdk-packages      # npm-архивы для web SDK
+nix build .#appimage              # переносимый десктопный AppImage
+```
+
+Flake использует закреплённый в `rust-toolchain.toml` Rust toolchain и сейчас
+публикуется для `x86_64-linux`. Flake пока не создаёт пакет Debian; если нужен
+`.deb`, используйте артефакты upstream-релиза. Выходы `prebuilt` используют
+версию релиза и хеши, закреплённые в `nix/release-manifest.json`, независимо от
+версии исходников workspace. После публикации релиза release workflow открывает
+PR для обновления этого манифеста. До слияния PR готовые выходы продолжают
+использовать предыдущий опубликованный релиз, а выходы, собираемые из исходников,
+всегда используют текущий checkout.
+
+**CLI (`op`):**
+
+```bash
+brew install zseven-w/openpencil/op
+```
+
+Или используйте скрипт установки (macOS / Linux):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | bash
+```
+
+Чтобы разрешить последнюю предварительную версию:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | OP_PRERELEASE=1 bash
+```
+
+Windows PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+Чтобы разрешить последнюю предварительную версию:
+
+```powershell
+$env:OP_PRERELEASE = "1"; irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+## Клонирование (с подмодулями)
+
+```bash
+git clone --recurse-submodules https://github.com/ZSeven-W/openpencil.git
+# Уже клонировали? Сначала синхронизируйте, чтобы старые URL подмодулей получили изменения .gitmodules:
+git submodule sync --recursive && git submodule update --init --recursive
+```
+
+В `vendor/` находятся три подмодуля. Все они публичны и загружаются по HTTPS (SSH-ключ не требуется): `jian` (GPU-Skia UI framework — widget/render/event), `casement` (форк winit) и `agent` (`agent-rs` — общий для OP и Zode межпродуктовый Rust agent runtime). `vendor/anthropic-agent-sdk` отслеживается непосредственно в репозитории и не является подмодулем.
+
 ## Быстрый старт
 
 ```bash
-# Установить зависимости
-bun install
-
-# Запустить сервер разработки на http://localhost:3000
-bun --bun run dev
+# Web dev server (builds the CanvasKit wasm bundle, then runs the headless web host)
+bash scripts/start-web-rust.sh
 ```
 
 Или запустить как десктопное приложение:
 
 ```bash
-bun run electron:dev
+cargo run -p op-host-desktop
 ```
 
-> **Требования:** [Bun](https://bun.sh/) >= 1.0 и [Node.js](https://nodejs.org/) >= 18
+> **Требования:** [Rust](https://www.rust-lang.org/) (stable) для сборки продукта. [Bun](https://bun.sh/) >= 1.0 и [Node.js](https://nodejs.org/) >= 18 нужны только для веб-SDK в `packages/`.
 
 ### Docker
 
-Доступно несколько вариантов образов — выберите подходящий для ваших нужд:
+Тегированные Rust-релизы публикуют один образ web host. Устаревшие TypeScript-образы со встроенными AI CLI больше не публикуются.
 
-| Образ                        | Размер  | Содержит              |
-| ---------------------------- | ------- | --------------------- |
-| `openpencil:latest`          | ~226 МБ | Только веб-приложение |
-| `openpencil-claude:latest`   | —       | + Claude Code CLI     |
-| `openpencil-codex:latest`    | —       | + Codex CLI           |
-| `openpencil-opencode:latest` | —       | + OpenCode CLI        |
-| `openpencil-copilot:latest`  | —       | + GitHub Copilot CLI  |
-| `openpencil-gemini:latest`   | —       | + Gemini CLI          |
-| `openpencil-full:latest`     | ~1 ГБ   | Все CLI-инструменты   |
+| Образ | Содержит |
+| --- | --- |
+| `ghcr.io/zseven-w/openpencil-web:vX.Y.Z` | Rust web host, wasm bundle и ресурсы CanvasKit |
 
-**Запуск (только веб):**
+Веб-интерфейс показывает только встроенные профили агентов; инструменты Claude/Codex/OpenCode/Copilot CLI не входят в Docker-образы.
+
+**Запуск:**
 
 ```bash
-docker run -d -p 3000:3000 ghcr.io/zseven-w/openpencil:latest
+VERSION="$(scripts/workspace-version.sh)"
+docker run -d -p 3100:3100 "ghcr.io/zseven-w/openpencil-web:v${VERSION}"
 ```
 
-**Запуск с AI CLI (например, Claude Code):**
-
-AI-чат использует OAuth-авторизацию Claude CLI. Используйте Docker-том для сохранения сессии авторизации:
-
-```bash
-# Шаг 1 — Авторизация (однократно)
-docker volume create openpencil-claude-auth
-docker run -it --rm \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest claude login
-
-# Шаг 2 — Запуск
-docker run -d -p 3000:3000 \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest
-```
+Затем откройте `http://localhost:3100/`.
 
 **Локальная сборка:**
 
 ```bash
-# Базовый (только веб)
-docker build --target base -t openpencil .
-
-# С конкретным CLI
-docker build --target with-claude -t openpencil-claude .
-
-# Полный (все CLI)
-docker build --target full -t openpencil-full .
+docker build -f Dockerfile.web-rust -t openpencil-web-rust .
+docker run -p 3100:3100 openpencil-web-rust
 ```
 
 ## AI-нативный дизайн
@@ -188,7 +256,6 @@ docker build --target full -t openpencil-full .
 | **Codex CLI**                   | Подключить в настройках агента (`Cmd+,`)                                                                       |
 | **OpenCode**                    | Подключить в настройках агента (`Cmd+,`)                                                                       |
 | **GitHub Copilot**              | `copilot login`, затем подключить в настройках агента (`Cmd+,`)                                                |
-| **Gemini CLI**                  | Подключить в настройках агента (`Cmd+,`)                                                                       |
 
 **Профили возможностей моделей** — автоматически адаптирует промпты, режим thinking и таймауты для каждого уровня моделей. Модели полного уровня (Claude) получают полные промпты; стандартного уровня (GPT-4o, Gemini, DeepSeek) — с отключённым thinking; базового уровня (MiniMax, Qwen, Llama, Mistral) — упрощённые промпты с вложенным JSON для максимальной надёжности.
 
@@ -196,8 +263,8 @@ docker build --target full -t openpencil-full .
 
 **MCP-сервер**
 
-- Встроенный MCP-сервер — установка в один клик в Claude Code / Codex / Gemini / OpenCode / Kiro / Copilot CLI
-- Автоопределение Node.js — если не установлен, автоматический переход на HTTP-транспорт и автозапуск MCP HTTP-сервера
+- Встроенный MCP-сервер (крейт `op-mcp`) — установка в один клик в Claude Code / Codex / OpenCode / Kiro / Copilot CLI
+- Node.js не требуется — stdio-транспорт через десктопный бинарный файл (`--mcp <path>`), плюс работающий HTTP-эндпоинт (`127.0.0.1:<port>/mcp`) из запущенного приложения
 - Автоматизация дизайна из терминала: чтение, создание и изменение файлов `.op` через любой MCP-совместимый агент
 - **Послойный рабочий процесс** — `design_skeleton` → `design_content` → `design_refine` для дизайнов высокого качества с несколькими секциями
 - **Сегментированное получение промптов** — загружайте только нужные знания о дизайне (schema, layout, roles, icons, planning и т.д.)
@@ -213,20 +280,22 @@ docker build --target full -t openpencil-full .
 Установите глобально и управляйте инструментом дизайна из терминала:
 
 ```bash
-npm install -g @zseven-w/openpencil
+brew install zseven-w/openpencil/op
 ```
 
 ```bash
 op start                     # Запустить десктопное приложение
+op start --headless --file design.op # Запустить headless-сервер
 op design @landing.txt       # Пакетный дизайн из файла
-op insert '{"type":"RECT"}'  # Вставить узел
+op design @ui.js             # Изолированный JavaScript с циклами
+op insert '{"type":"rectangle"}' # Вставить узел
 op import:figma design.fig   # Импортировать файл Figma
 cat design.dsl | op design - # Передача через stdin
 ```
 
-Поддерживает три метода ввода: строка, `@filepath` (чтение из файла) или `-` (чтение из stdin). Работает с десктопным приложением или веб-сервером разработки. Подробнее в [CLI README](./apps/cli/README.md).
+Поддерживает строку, `@filepath` и stdin (`-`). Работает с десктопным приложением, веб-сервером или файловым headless-сервером. Все команды перечислены в [справочнике CLI](./crates/op-cli/src/usage.txt).
 
-**LLM-навык** — установите плагин [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill), чтобы научить ИИ-агентов (Claude Code, Cursor, Codex, Gemini CLI и др.) проектировать с помощью `op`.
+**LLM-навык** — установите плагин [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill), чтобы научить ИИ-агентов проектировать с помощью `op`. Используйте `op install` для обнаруженных агентов или `op install --target codex` для конкретной цели.
 
 ## Возможности
 
@@ -254,8 +323,30 @@ cat design.dsl | op design - # Передача через stdin
 - Послойный рабочий процесс — `design_skeleton` → `design_content` → `design_refine` со сфокусированными промптами на каждой фазе
 - Руководства по стилю — 50+ встроенных стилей (glassmorphism, brutalist, retro и т. д.) с нечётким сопоставлением по тегам, интегрированным в планирование и генерацию
 - Профили возможностей мультимодели — автоматически подстраивает режим размышления, уровень усилий и форму промпта в зависимости от уровня модели
-- Встроенный рантайм агентов (`agent-native`, Zig NAPI) + провайдеры Anthropic, Claude Agent SDK, OpenCode, Codex, Copilot, Gemini
+- Встроенный рантайм агентов (Rust) + провайдеры Anthropic, Claude Agent SDK, OpenCode, Codex, Copilot и Google Gemini API
 - Проброс формата Anthropic для китайских провайдеров LLM — Kimi, Zhipu, GLM, DouBao, Ark, Bailian/DashScope, ModelScope, Coding Plans
+
+**Совместная работа**
+
+- Аутентифицированные peer-to-peer сессии с публичным relay-фолбэком и встроенными региональными хабами для совместной работы
+- Подключение по 10-символьному коду сопряжения с меткой региона — для LAN-сессий аккаунт не требуется
+- Живые удалённые курсоры, совместная работа между аккаунтами и панель конфликтов с детализацией по каждому изменению и повтором отклонённых правок
+- Онлайн-режим мультиарендности для демона `--serve-web`, с аутентификацией через op-hub и совместным доступом арендаторов между аккаунтами
+- Вход с устройства — авторизация из браузера через демон serve-web, с аватарами профилей и именами пользователей в редакторе
+
+**Презентации**
+
+- Шесть шаблонов презентаций 16:9 с выбором шаблона, плюс AI-планирование презентаций в размере проектора — один слайд на экран
+- Показ презентации в режиме слайд-шоу с элементами управления докладчика
+- Экспорт презентации в PDF (одна страница на слайд), самодостаточный HTML-файл слайд-шоу, редактируемый PowerPoint (`.pptx`) или видеокомпозицию hyperframes
+- Навигатор-лента слайдов; агент проверяет геометрию досок презентации (соотношение сторон, переполнение, центрирование), а также промпт
+
+**Шаблоны и веб-захват**
+
+- Центр шаблонов сцен — просматриваемый каталог из 58 шаблонов в шести сценах, открывается через Файл ▸ Создать из шаблона
+- Центр промптов с записями для web, дашбордов, компонентов и изменения, а также визуальными предпросмотрами промптов
+- Центр ресурсов — адаптивная галерея на весь экран с шаблонами двойного действия и импортом стилей DESIGN.md
+- [Расширение веб-захвата для Chrome](https://chromewebstore.google.com/detail/openpencil/ahfofgelkdaobcmglejmjbpnajhpgcij) — снимок любой веб-страницы в OpenPencil с точным захватом HTML / раскладки; снимки доставляются во входящие вашего аккаунта на хабе или загружаются офлайн как готовый к открытию файл `.op`
 
 **Интеграция с Git**
 
@@ -278,9 +369,9 @@ cat design.dsl | op design - # Передача через stdin
 
 **Десктопное приложение**
 
-- Нативная поддержка macOS, Windows и Linux через Electron
+- Нативная поддержка macOS, Windows и Linux — единый самодостаточный бинарный файл (winit + GPU Skia, без Electron)
 - Ассоциация файлов `.op` — двойной клик для открытия, блокировка единственного экземпляра
-- Автообновление из GitHub Releases
+- Фоновая проверка обновлений через GitHub Releases
 - Нативное меню приложения с пунктами «Сохранить как», «Открыть недавние» и диалогом несохранённых изменений при закрытии
 - Сохранение списка недавних файлов
 
@@ -288,51 +379,87 @@ cat design.dsl | op design - # Передача через stdin
 
 |                      |                                                                                  |
 | -------------------- | -------------------------------------------------------------------------------- |
-| **Фронтенд**         | React 19 · TanStack Start · Tailwind CSS v4 · shadcn/ui · i18next                |
-| **Холст**            | CanvasKit/Skia (WASM, GPU-ускорение)                                             |
-| **Состояние**        | Zustand v5                                                                       |
-| **Сервер**           | Nitro                                                                            |
-| **Десктоп**          | Electron 35                                                                      |
-| **CLI**              | `op` — управление из терминала, пакетный DSL дизайна                             |
-| **AI**               | Vercel AI SDK v6 · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
-| **Среда выполнения** | Bun · Vite 7                                                                     |
-| **Формат файла**     | `.op` — на основе JSON, удобочитаемый, дружественный к Git                       |
+| **Ядро**              | Rust-пространство (`crates/`) — состояние редактора, виджеты, хосты, MCP, AI, кодген |
+| **Рендеринг**         | GPU Skia везде — `skia-safe` (GL) на нативных платформах, CanvasKit (WASM/WebGL2) в браузере |
+| **UI-фреймворк**      | jian — вендоренный чистый Rust GPU-Skia UI-фреймворк: виджеты, раскладка, события, горячая перезагрузка (`vendor/jian`) |
+| **Оконная система**   | winit (вендоренный форк `casement`)                                             |
+| **Десктоп**           | Нативный бинарный файл `openpencil-desktop` — без браузерного движка            |
+| **Веб-SDK**           | `op-web-sdk` + адаптеры React 19 / Vue 3 — SDK для просмотра `.op` только для чтения (TypeScript) |
+| **CLI**               | `op` — управление из терминала, пакетный DSL дизайна                             |
+| **AI**                | Встроенный рантайм агентов (Rust) · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
+| **Линтинг**           | clippy · rustfmt (Rust) · oxlint · oxfmt (веб-SDK)                               |
+| **Формат файла**      | `.op` — на основе JSON, удобочитаемый, дружественный к Git                       |
+
+## Экосистема
+
+OpenPencil — часть семейства AI-нативных инструментов на чистом Rust от **[ZSeven-W](https://github.com/ZSeven-W)**. Они дополняют друг друга: `jian` отрисовывает OpenPencil, `agent-rs` запускает его агентов, `noema` запоминает, а `zode` проектирует из терминала.
+
+| Проект | Что это такое |
+| ------ | ------------- |
+| **[DSH OpenPencil](https://github.com/ZSeven-W/dsh-openpencil)** | Плагин DeepSeek Harness для OpenPencil — точные многокадровые превью `.op`, интерактивный холст и управляемый редактор с нативными для агентов инструментами дизайна прямо в диалоге. |
+| **[Zode](https://github.com/ZSeven-W/zode)** | Open-source AI-нативный ассистент для программирования в вашем терминале — быстрый Rust TUI (`ratatui`), который читает ваш код, выполняет команды, ищет файлы и управляет git. Управляет OpenPencil через MCP. |
+| **[agent-rs](https://github.com/ZSeven-W/agent-rs)** | Асинхронный рантайм на чистом Rust для выпуска LLM-агентов — мультипровайдерный, со сквозной поддержкой инструментов, структурированными разрешениями, настоящим MCP и нулём `unsafe`. Питает встроенный рантайм агентов OpenPencil (`vendor/agent`) и Zode. |
+| **[jian](https://github.com/ZSeven-W/jian)** | UI-фреймворк на чистом Rust с GPU-Skia — виджеты, раскладка, события и горячая перезагрузка в одном стеке. Превращает декларативный документ `.op` в нативное, управляемое ИИ приложение без JS-рантайма, без DOM, без Electron. UI-фреймворк OpenPencil (`vendor/jian`). |
+| **[noema](https://github.com/ZSeven-W/noema)** | Локальная невекторная система памяти для агентов программирования. Долговременная память в виде инспектируемых файлов, очередь на проверку новых записей и лексический (без эмбеддингов) поиск — работает в Zode, Codex, Claude Code и рантаймах MCP. |
+
+## Почему Rust
+
+OpenPencil переписан с нуля на **Rust** ([#129](https://github.com/ZSeven-W/openpencil/issues/129)). Переписывание завершено — редактор на TypeScript + Electron был выведен из эксплуатации в `v0.7.5`, и Rust-пространство в этом репозитории — это и есть продукт: единое нативное ядро, значительно меньшее и быстрее, работающее на большем количестве платформ из единой кодовой базы.
+
+|                          | TypeScript + Electron (устарел, `v0.7.5`)      | Rust (сегодня)                                                                |
+| ------------------------ | ---------------------------------------------- | ----------------------------------------------------------------------------- |
+| **Рантайм на десктопе**  | Electron — включает Chromium + Node.js         | Нативное окно (`winit` + GPU Skia), без браузерного движка                    |
+| **Размер на десктопе**   | Полный рантайм Chromium при каждой установке   | Один самодостаточный бинарный файл — **55.5 MB**                              |
+| **Объём для веба**       | JS + WASM бандл                                | **8.2 MB** wasm / **2.18 MB** gzip по сети                                   |
+| **Рендеринг**            | CanvasKit/Skia на вебе                         | Единый GPU-ускоренный Skia бэкенд на **каждой** платформе                     |
+| **Память**               | Паузы JavaScript GC                            | Без GC — владение Rust, предсказуемая задержка                                |
+| **Кодовая база**         | Веб-стек + Electron           | Одно Rust-пространство: редактор · CLI · MCP · AI · кодген · Figma · Git     |
+| **Платформы**            | Веб + десктоп, два раздельных стека            | Десктоп (macOS/Win/Linux) · мобильные (iOS/Android) · браузер — одно ядро    |
+
+**Измеренные улучшения**
+
+- **Минимальный размер** — всё десктопное приложение представляет собой один нативный бинарный файл **55.5 MB** вместо встроенного браузерного движка плюс Node-рантайм. Веб-сборка составляет **8.2 MB** в несжатом виде / **2.18 MB** gzip после разбивки каталога иконок (−48% по сети).
+- **Масштабируется на больших документах** — холст с **10,000 узлами** в реальном времени (вложенный авто-layout, четыре уровня глубины) записывает, читает и делает снимок раскладки **без паник и при ~0% CPU в режиме ожидания**; полный снимок раскладки всех 10k узлов возвращается за **~0.68 с**.
+- **Быстрое взаимодействие** — панорамирование/зум больше не сериализует документ заново на каждом кадре (одно исправление горячего пути снизило CPU при зуме колесом с **~69% до ~0%**); перетаскивание обновляет сцену инкрементально, измерение текста кэшируется, а перерисовки объединяются в одну на кадр.
+- **Одно ядро, каждый экран** — одно и то же состояние редактора и один и тот же рендер-бэкенд компилируются в нативный десктоп, мобильные устройства и браузер через WASM — без параллельных реализаций, которые нужно синхронизировать.
+- **GPU Skia везде** — нативный рендеринг через `skia-safe` на GL-контексте; браузер рендерит через CanvasKit на WebGL2 — один и тот же код рисования, один и тот же вывод.
+- **Нативная доступность** — AccessKit на macOS, Windows и Linux, плюс DOM-зеркало на вебе, вместо опоры на дерево доступности браузера.
+- **Одно типизированное пространство** — хост MCP, CLI, AI-провайдеры, генерация кода, импорт Figma и интеграция с Git — всё в одном Rust-пространстве с контролем цепочки поставок через `cargo-deny` в CI.
+
+> **Статус:** редактор на TypeScript был выведен из эксплуатации в `v0.7.5` и сохранился только в истории git; этот репозиторий — это Rust-пространство. Продукт на Rust находится в активной разработке (см. [Дорожная карта](#дорожная-карта) ниже).
 
 ## Структура проекта
 
 ```text
 openpencil/
-├── apps/
-│   ├── web/                 Веб-приложение TanStack Start
-│   │   ├── src/
-│   │   │   ├── canvas/      Движок CanvasKit/Skia — рисование, синхронизация, раскладка
-│   │   │   ├── components/  React UI — редактор, панели, общие диалоги, иконки
-│   │   │   ├── services/ai/ AI-чат, оркестратор, генерация дизайна, стриминг
-│   │   │   ├── stores/      Zustand — холст, документ, страницы, история, AI
-│   │   │   ├── mcp/         Инструменты MCP-сервера для интеграции с внешними CLI
-│   │   │   ├── hooks/       Горячие клавиши, перетаскивание файлов, вставка из Figma
-│   │   │   └── uikit/       Система переиспользуемых наборов компонентов
-│   │   └── server/
-│   │       ├── api/ai/      Nitro API — стриминговый чат, генерация, валидация
-│   │       └── utils/       Обёртки клиентов Claude CLI, OpenCode, Codex, Copilot
-│   ├── desktop/             Десктопное приложение Electron
-│   │   ├── main.ts          Окно, форк Nitro, нативное меню, автообновление
-│   │   ├── ipc-handlers.ts  Нативные файловые диалоги, синхронизация темы, настройки IPC
-│   │   └── preload.ts       IPC-мост
-│   └── cli/                 CLI-инструмент — команда `op`
-│       ├── src/commands/    Команды: дизайн, документ, экспорт, импорт, узлы, страницы, переменные
-│       ├── connection.ts    WebSocket-соединение с запущенным приложением
-│       └── launcher.ts      Автоопределение и запуск десктопного приложения или веб-сервера
-├── packages/
-│   ├── pen-types/           Определения типов для модели PenDocument
-│   ├── pen-core/            Операции с деревом документа, движок раскладки, переменные
-│   ├── pen-codegen/         Генераторы кода (React, HTML, Vue, Flutter, ...)
-│   ├── pen-figma/           Парсер и конвертер файлов Figma .fig
-│   ├── pen-renderer/        Автономный рендерер CanvasKit/Skia
-│   ├── pen-sdk/             Зонтичный SDK (реэкспортирует все пакеты)
-│   ├── pen-ai-skills/       Движок AI-навыков (фазовая загрузка промптов)
-│   └── agent/               SDK AI-агента (Vercel AI SDK, мультипровайдер, команды агентов)
-└── .githooks/               Pre-commit синхронизация версий из имени ветки
+├── crates/                   Rust-пространство — продукт
+│   ├── op-editor-core/       Каноническое состояние редактора `.op` (PenDocument) + EditorCommand + переменные дизайна
+│   ├── op-editor-ui/         Платформонезависимые виджеты + фасад RenderBackend (wasm32-clean)
+│   ├── op-editor-host-core/  Транспортонезависимые state machine хостов, общие для всех хостов
+│   ├── op-host-native/       Библиотека нативного хоста — winit + skia-safe GL (десктоп + мобильные)
+│   ├── op-host-web/          Браузерный бандл — wasm32 cdylib, рендерер CanvasKit
+│   ├── op-host-desktop/      Десктопный бинарный файл `openpencil-desktop`; также демон `--serve-web`
+│   ├── op-host-services/     Библиотека headless-демона serve-web / MCP
+│   ├── op-host-web-server/   Тонкий веб-серверный бинарный файл без GL
+│   ├── op-cli/               CLI-инструмент — команда `op`
+│   ├── op-mcp/               MCP-сервер — инструменты, пакетный дизайн, послойный рабочий процесс
+│   ├── op-ai/                AI-провайдеры, рантайм чата, стриминг
+│   ├── op-ai-skills/         Движок AI-навыков (фазовая загрузка промптов)
+│   ├── op-orchestrator/      Оркестрация параллельных команд агентов
+│   ├── op-codegen/           Генераторы кода (React, HTML, Vue, Flutter, ...)
+│   ├── op-figma/             Парсер и конвертер файлов Figma .fig
+│   ├── op-git/               Интеграция с Git — клонирование, ветки, push/pull, слияние
+│   └── ...                   op-opmerge / op-pen-loader / op-design-lint / op-i18n /
+│                             op-config-store / op-process-io / op-acp / op-smoke / ...
+├── packages/                 Пространство веб-SDK (Bun)
+│   ├── op-web-sdk/           SDK веб-просмотрщика `.op` только для чтения (обёртка wasm-бандла)
+│   ├── op-web-sdk-react/     Адаптер React 19
+│   └── op-web-sdk-vue/       Адаптер Vue 3
+├── vendor/                   Вендоренные подсистемы (git submodules)
+│   ├── jian/                 GPU-Skia UI-фреймворк — виджеты/рендеринг/события
+│   ├── casement/             Форк winit
+│   └── agent/                Кроссплатформенный Rust-рантайм агентов (agent-rs)
+└── .githooks/                Pre-commit проверка расхождений версий
 ```
 
 ## Горячие клавиши
@@ -356,15 +483,23 @@ openpencil/
 ## Скрипты
 
 ```bash
-bun --bun run dev          # Сервер разработки (порт 3000)
-bun --bun run build        # Сборка для продакшена
-bun --bun run test         # Запустить тесты (Vitest)
-npx tsc --noEmit           # Проверка типов
-bun run bump <version>     # Синхронизация версий во всех package.json
-bun run electron:dev       # Разработка Electron
-bun run electron:build     # Упаковка Electron
-bun run cli:dev            # Запуск CLI из исходников
-bun run cli:compile        # Компиляция CLI в dist
+# Product (Rust — run from the repo root)
+cargo build --workspace              # Build all crates (add --release for prod)
+cargo test --workspace               # Run all tests
+cargo check --workspace              # Type check
+cargo clippy --workspace --all-targets -- -D warnings   # Lint
+cargo fmt --all                      # Format
+bash scripts/start-web-rust.sh       # Web dev server (wasm bundle + headless host)
+cargo run -p op-host-desktop         # Desktop app (binary: openpencil-desktop)
+cargo run -p op-cli -- <args>        # CLI (binary: op)
+
+# Web SDK / JS tooling (run from packages/)
+cd packages && bun run lint          # Lint the web SDK (oxlint); also: bun run format
+cd packages && bun run generate-iconify-catalog   # Regenerate the Rust icon catalog assets
+
+# Синхронизация версий (запускайте из корня репозитория)
+scripts/sync-version.sh                            # Sync all managed versions from root Cargo.toml
+tools/check-version-sync.sh                        # Verify all managed versions match root Cargo.toml
 ```
 
 ## Участие в разработке
@@ -372,9 +507,9 @@ bun run cli:compile        # Компиляция CLI в dist
 Мы приветствуем вклад в проект! Подробности об архитектуре и стиле кода смотрите в [CLAUDE.md](./CLAUDE.md).
 
 1. Сделайте форк и клонируйте репозиторий
-2. Настройте синхронизацию версий: `git config core.hooksPath .githooks`
+2. Включите проверку расхождений версий: `git config core.hooksPath .githooks`
 3. Создайте ветку: `git checkout -b feat/my-feature`
-4. Запустите проверки: `npx tsc --noEmit && bun --bun run test`
+4. Запустите проверки: `cargo test --workspace && cargo clippy --workspace --all-targets -- -D warnings`
 5. Сделайте коммит в формате [Conventional Commits](https://www.conventionalcommits.org/): `feat(canvas): add rotation snapping`
 6. Откройте PR в ветку `main`
 
@@ -388,13 +523,20 @@ bun run cli:compile        # Компиляция CLI в dist
 - [x] Импорт Figma `.fig`
 - [x] Булевы операции (объединение, вычитание, пересечение)
 - [x] Мультимодельные профили возможностей
-- [x] Реструктуризация в монорепозиторий с переиспользуемыми пакетами
+- [x] Workspace Cargo с переиспользуемыми Rust-крейтами и пакетами веб-SDK
+- [x] Rust-редактор для настольных систем и веба
 - [x] CLI-инструмент (`op`) для управления из терминала
-- [x] Встроенный SDK AI-агента с поддержкой нескольких провайдеров
+- [x] Встроенная среда выполнения Rust-агентов с поддержкой нескольких провайдеров
 - [x] i18n — 15 языков
+- [x] SDK для просмотра на базе wasm для JavaScript, React и Vue
+- [x] Style Guides с сопоставлением по тегам и инструментами MCP
+- [x] Параллельные Agent Teams с делегированием и индикаторами на холсте
 - [x] Интеграция с Git (клон, ветки, push/pull, трёхстороннее слияние в режиме папки)
-- [x] Растровый экспорт холста (PNG / JPEG / WEBP / PDF)
-- [ ] Совместное редактирование
+- [x] Экспорт холста (SVG / PNG / JPEG / WEBP / PDF)
+- [x] Совместное редактирование — аутентифицированный P2P, публичный relay и региональные хабы
+- [x] Презентации — шаблоны, режим докладчика слайд-шоу и экспорт PDF/HTML/PPTX/видео
+- [x] Вход с устройства и онлайн-режим мультиарендности для веб-хостинга
+- [x] Расширение веб-захвата для Chrome с импортом HTML / снимков браузера
 - [ ] Система плагинов
 
 ## Участники
@@ -416,20 +558,21 @@ OpenPencil бесплатен и open source. Разработка финанс�
 ## Сообщество
 
 <a href="https://discord.gg/h9Fmyy6pVh">
-  <img src="./apps/web/public/logo-discord.svg" alt="Discord" width="16" />
+  <img src="./screenshot/logo-discord.svg" alt="Discord" width="16" />
   <strong> Присоединяйтесь к нашему Discord</strong>
 </a>
 — Задавайте вопросы, делитесь дизайнами, предлагайте функции.
 
-## Star History
+**Признанное сообщество: [LINUX DO](https://linux.do/)**
 
-<a href="https://star-history.com/#ZSeven-W/openpencil&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" width="100%" />
- </picture>
-</a>
+## Форки сторонних библиотек
+
+Мы благодарим сопровождающих upstream-проектов, на чьих разработках основан OpenPencil. Эти копии поддерживаются только для специфических потребностей интеграции OpenPencil:
+
+- **[casement](https://github.com/ZSeven-W/casement)** — форк **[winit](https://github.com/rust-windowing/winit)**.
+- **[anthropic-agent-sdk](./vendor/anthropic-agent-sdk)** — включена в репозиторий из **[bartolli/anthropic-agent-sdk](https://github.com/bartolli/anthropic-agent-sdk)** и поддерживается как локальный форк.
+
+К каждому проекту по-прежнему применяются условия его исходной лицензии.
 
 ## Оценки
 

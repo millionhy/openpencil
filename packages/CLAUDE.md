@@ -1,87 +1,90 @@
 # Packages
 
-Shared libraries consumed by `apps/web` and `apps/desktop`. All re-exported via `@zseven-w/pen-sdk`.
+The web SDK packages that remain after the TypeScript retirement. This directory is the **npm/Bun workspace root** (`packages/package.json`); the repository root is a **pure Cargo workspace** with no `package.json`.
 
-## pen-types (`pen-types/src/`)
+> The `pen-*` packages (pen-types, pen-core, pen-engine, pen-renderer, pen-figma, pen-mcp, pen-ai-skills, pen-sdk, pen-react, pen-acp) and pen-codegen were **retired** along with `apps/*`. Their functionality now lives in the Rust `crates/` (see `crates/CLAUDE.md`). Nothing here depends on them. The `agent-native` Zig runtime was also **removed** — the built-in agent runtime is now the Rust `agent` crate (`vendor/agent`, shared with Zode).
 
-Type definitions (9 files):
+## Workspace tooling
 
-- `pen.ts` — PenDocument/PenNode (frame, group, rectangle, ellipse, line, polygon, path, text, image, ref), ContainerProps, `PenPage`; `PenDocument.variables`, `PenDocument.themes`, `PenDocument.pages`
-- `canvas.ts` — ToolType, ViewportState, SelectionState, CanvasInteraction
-- `styles.ts` — PenFill (solid, linear_gradient, radial_gradient), PenStroke, PenEffect, BlendMode, StyledTextSegment
-- `variables.ts` — `VariableDefinition`, `ThemedValue`, `VariableValue`
-- `uikit.ts` — UIKit, KitComponent, ComponentCategory types
-- `agent-settings.ts` — AI provider config types
-- `electron.d.ts` — Electron IPC bridge types
-- `theme-preset.ts` — Theme preset types
-- `opencode-sdk.d.ts` — Type declarations for @opencode-ai/sdk
+Run these from `packages/`:
 
-## pen-core (`pen-core/src/`)
+- **Lint / format the SDK:** `bun run lint` (oxlint, plus the extension's extractor drift check) / `bun run format` (oxfmt).
+- **Iconify catalog (Rust assets):** `bun run generate-iconify-catalog` — `scripts/generate-iconify-catalog.mjs` reads `@iconify-json/*` and writes `crates/op-editor-ui/assets/iconify-catalog-{core,brands}.json` (the icon catalog embedded in / served by the Rust web target).
+- **Sync SDK versions:** `bun run sync-version` reads the canonical version from root `Cargo.toml` and updates all SDK consumers; verify with `bun run sync-version:check`.
 
-Core document operations (11 files + `layout/` + `variables/` subdirs):
+## op-web-sdk (`op-web-sdk/`)
 
-- `tree-utils.ts` — Pure tree helpers: `findNodeInTree`, `findParentInTree`, `removeNodeFromTree`, `updateNodeInTree`, `flattenNodes`, `insertNodeInTree`, `isDescendantOf`, `getNodeBounds`, `findClearX`, `scaleChildrenInPlace`, `rotateChildrenInPlace`, `createEmptyDocument`, `DEFAULT_FRAME_ID`; Clone utilities: `deepCloneNode`, `cloneNodeWithNewIds`, `cloneNodesWithNewIds` (canonical source for all node cloning)
-- `normalize.ts` — Pen file normalization (format fixes only, preserves `$variable` refs)
-- `boolean-ops.ts` — Union/subtract/intersect via Paper.js
-- `sync-lock.ts` — Prevents circular sync loops
-- `arc-path.ts` — SVG arc utilities
-- `font-utils.ts` — Font utilities
-- `node-helpers.ts` — Node helper functions
-- `constants.ts` — Core constants
-- `id.ts` — ID generation (`nanoid`)
-- `layout/engine.ts` — Auto-layout computation: `resolvePadding`, `getNodeWidth/Height`, `computeLayoutPositions`
-- `layout/text-measure.ts` — Text width/height estimation, CJK detection, `parseSizing`
-- `variables/resolve.ts` — Core resolution: `resolveVariableRef`, `resolveNodeForCanvas`, `getDefaultTheme`, `isVariableRef`
-- `variables/replace-refs.ts` — `replaceVariableRefsInTree`: recursively walk node tree to replace/resolve `$refs`
+Read-only OpenPencil `.op` **viewer** SDK for the web, wasm-backed. Wraps the `op-host-web` CanvasKit wasm bundle behind a small JS/TS embedding API (mount / load `.op` / viewport control / zoom-to-fit). Replaces the public role of the retired `pen-react` (viewing only — editing is not a goal of the public SDK).
 
-## pen-codegen (`pen-codegen/src/`)
+- Zero runtime dependencies; ships its own wasm under `wasm/`.
+- Build: `tsup` (`bun run build` inside the package). Tests: `vitest`.
 
-Multi-platform code generators (9 files, output `var(--name)` for `$variable` refs):
+## op-web-sdk-react (`op-web-sdk-react/`)
 
-- `react-generator.ts` — React + Tailwind CSS
-- `html-generator.ts` — HTML + CSS
-- `css-variables-generator.ts` — CSS Variables from design tokens
-- `vue-generator.ts` — Vue 3 + CSS
-- `svelte-generator.ts` — Svelte + CSS
-- `flutter-generator.ts` — Flutter/Dart
-- `swiftui-generator.ts` — SwiftUI
-- `compose-generator.ts` — Android Jetpack Compose
-- `react-native-generator.ts` — React Native
+React 19 adapter for `op-web-sdk` (component + hooks wrapper). Depends only on `@zseven-w/op-web-sdk` (+ peer `react` / `react-dom`).
 
-## pen-figma (`pen-figma/src/`)
+## op-web-sdk-vue (`op-web-sdk-vue/`)
 
-Figma `.fig` file import pipeline (17 files):
+Vue 3 adapter for `op-web-sdk`. Depends only on `@zseven-w/op-web-sdk` (+ peer `vue`).
 
-- `fig-parser.ts` — Binary `.fig` file parser
-- `figma-node-mapper.ts` — Maps Figma nodes to PenNodes (uses injectable icon lookup via `setIconLookup()`)
-- `figma-node-converters.ts` — Figma node conversion utilities
-- `figma-fill-mapper.ts`, `figma-stroke-mapper.ts`, `figma-effect-mapper.ts` — Style converters
-- `figma-layout-mapper.ts` — Maps Figma auto-layout to PenNode layout props
-- `figma-text-mapper.ts` — Converts Figma text styles
-- `figma-vector-decoder.ts` — Decodes Figma vector geometry
-- `figma-color-utils.ts` — Color space conversion utilities
-- `figma-image-resolver.ts` — Resolves image blob references
-- `figma-clipboard.ts` — Figma clipboard paste handling
-- `figma-tree-builder.ts` — Figma document tree building
-- `figma-types.ts` — Figma internal type definitions
+## op-chrome-extension (`op-chrome-extension/`)
 
-## pen-renderer (`pen-renderer/src/`)
+Manifest V3 Chrome extension that captures the **rendered** active tab and
+imports it into a running OpenPencil. No dependencies, not a Bun workspace
+member — load it unpacked from `chrome://extensions`.
 
-Standalone CanvasKit/Skia renderer (13 files):
-
-- `renderer.ts` — Core renderer class
-- `document-flattener.ts` — Document tree flattening with layout resolution
-- `node-renderer.ts` — Node-level draw calls
-- `text-renderer.ts` — Text rendering
-- `paint-utils.ts` — Color parsing, gradient creation
-- `path-utils.ts` — SVG path conversion
-- `image-loader.ts` — Async image loading and caching
-- `font-manager.ts` — Font management
-- `spatial-index.ts` — R-tree backed spatial queries
-- `viewport.ts` — Viewport math
-- `init.ts` — CanvasKit WASM loader
-- `types.ts` — Renderer-specific types
-
-## pen-sdk (`pen-sdk/src/`)
-
-Umbrella SDK (1 file): `index.ts` re-exports all packages.
+- **The logic is Rust.** `crates/op-chrome-extension-core` (endpoint rules,
+  chunked-transfer integrity, `/mcp` envelope + reply classification, download-name
+  sanitisation) compiles to wasm; `packages/op-chrome-extension/scripts/build-wasm.sh`
+  runs `cargo build --target wasm32-unknown-unknown` + `wasm-bindgen --target web`
+  and installs the shim + module into `op-chrome-extension/wasm/`, which is
+  **gitignored** like every other wasm-bindgen output in the repo. **Build it
+  before "Load unpacked"** — the popup reports an actionable error otherwise.
+  Unit-test the logic natively with `cargo test -p op-chrome-extension-core`.
+- The JS that remains is glue: `chrome.*` calls, `fetch`, popup DOM, and the
+  functions injected into the captured tab (which must be JS — they run in the
+  page's process). The manifest declares `'wasm-unsafe-eval'` in
+  `content_security_policy.extension_pages`, which is what MV3 requires to
+  instantiate a bundled `.wasm`; no code is fetched from outside the package.
+- The capture engine is `vendor/snapshot-extractor.js`, a **byte-identical copy**
+  of `crates/op-html/assets/snapshot-extractor.js` (the contract
+  `op_html::import_snapshot` parses). `bun run lint` runs
+  `op-chrome-extension/scripts/check-extractor-sync.sh`, which fails on drift;
+  `--fix` re-copies the canonical asset. Never edit the copy.
+- The live MCP endpoint exposes two extension-scoped REST capabilities. Snapshot
+  import uses `POST /api/import/web-snapshot` (insert-only and open to a
+  well-formed `chrome-extension://` origin unless explicitly pinned), with a
+  plain `/mcp` `tools/call import_web_snapshot` fallback for unmanaged
+  `--serve-web`. Intelligent `design.md` extraction uses a stricter asynchronous
+  `POST /api/generate/design-md` + GET/DELETE job flow: it accepts only bounded
+  style evidence and queues model work only for an extension id explicitly
+  paired through `OPENPENCIL_EXTENSION_ALLOWED_IDS` and a cancellable,
+  evidence-only built-in API provider; tool-capable CLI/ACP adapters are not
+  eligible. The extension generates a deterministic local guide when pairing
+  or compatible model generation is unavailable.
+  See `snapshot_ingest.rs` and `design_md_route.rs` under
+  `crates/op-host-services/src/mcp_live/`. The extension's offline path is
+  **Download .op**, which converts the capture locally into a ready-to-open
+  document.
+- **Account (optional).** The popup header can sign in to OP Hub through the
+  hub's own BFF: a tab on `GET /api/v1/auth/login?return_to=/account`, then
+  `GET /api/v1/session` with `credentials: 'include'`. The extension is a
+  public client — no SSO secret, no token, no `cookies` permission; the hub's
+  `HttpOnly` session cookie stays in the browser's jar. Regions `cn` /
+  `global` map to `https://op.zseven.cn` / `https://op.zseven.tech`, both in
+  `host_permissions`, and `account.rs` asserts the manifest agrees.
+- **Account delivery (optional, signed in).** `POST <hub>/api/v1/snapshots`
+  with `credentials: 'include'` + `X-CSRF-Token`, i.e. op-hub's per-user
+  snapshot inbox. The envelope, the page-title-derived name, the 32 MiB
+  ceiling and the reply classification are Rust (`hub.rs` / `hub_reply.rs`);
+  `delivery.rs` remains the single rule that decides local vs account, and an
+  expired session collapses to local. The service worker's element-pick flow
+  runs its own session probe (`account.js` is in the worker's static graph and
+  stays dynamic-import-free). Contract history:
+  `op-chrome-extension/docs/hub-inbox-api-proposal.md`.
+- **Store packaging.** `bun run package-extension` (or
+  `op-chrome-extension/scripts/package-extension.sh`) builds the wasm, runs
+  the tests and all four guards, stages only the runtime files, copies `pt` to
+  `pt_BR`/`pt_PT` for Chrome's manifest-locale lookup, and writes
+  `op-chrome-extension/dist/op-chrome-extension-<version>.zip` (gitignored).
+  The listing's privacy policy is `op-chrome-extension/docs/privacy-policy.md`.

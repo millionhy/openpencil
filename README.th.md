@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./apps/desktop/build/icon.png" alt="OpenPencil" width="120" />
+  <img src="./crates/op-host-desktop/assets/icon.png" alt="OpenPencil" width="120" />
 </p>
 
 <h1 align="center">OpenPencil</h1>
@@ -16,8 +16,12 @@
 <p align="center">
   <a href="https://github.com/ZSeven-W/openpencil/stargazers"><img src="https://img.shields.io/github/stars/ZSeven-W/openpencil?style=flat&color=cfb537" alt="Stars" /></a>
   <a href="https://github.com/ZSeven-W/openpencil/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ZSeven-W/openpencil?color=64748b" alt="License" /></a>
-  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/ci.yml?branch=main&label=CI" alt="CI" /></a>
-  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/discord/1476517942949580952?label=Discord&logo=discord&logoColor=white&color=5865F2" alt="Discord" /></a>
+  <a href="https://github.com/ZSeven-W/openpencil/actions/workflows/rust-check.yml"><img src="https://img.shields.io/github/actions/workflow/status/ZSeven-W/openpencil/rust-check.yml?label=CI" alt="CI" /></a>
+  <a href="https://discord.gg/h9Fmyy6pVh"><img src="https://img.shields.io/badge/Discord-Join%20chat-5865F2?logo=discord&logoColor=white" alt="Discord" /></a>
+</p>
+
+<p align="center">
+  <a href="https://trendshift.io/repositories/24088?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-24088" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/24088" alt="ZSeven-W%2Fopenpencil | Trendshift" width="250" height="55" /></a>
 </p>
 
 <br />
@@ -29,11 +33,18 @@
 </p>
 <p align="center"><sub>คลิกที่รูปภาพเพื่อดูวิดีโอสาธิต</sub></p>
 
-<br />
-
-> **หมายเหตุ:** มีโปรเจกต์โอเพนซอร์สอีกโปรเจกต์หนึ่งที่ใช้ชื่อเดียวกัน — [OpenPencil](https://github.com/open-pencil/open-pencil) ซึ่งเน้นการออกแบบภาพที่เข้ากันได้กับ Figma พร้อมการทำงานร่วมกันแบบเรียลไทม์ โปรเจกต์นี้เน้นเวิร์กโฟลว์ AI-native สำหรับการแปลงดีไซน์เป็นโค้ด
-
 ## ทำไมต้อง OpenPencil
+
+<a href="https://fluxionai.world/register?source=github&amp;campaign=github-openpencil&amp;promo=OPENPENCIL" title="Fluxion AI">
+  <img src="./screenshot/fluxion-ai-sponsor-banner.png" alt="Fluxion AI — reliable, cost-efficient access to GPT, Claude, and other leading AI models through one unified API" width="100%" />
+</a>
+
+### [OpenPencil × Fluxion AI | One unified API for GPT, Claude, and more](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL)
+
+Thanks to [Fluxion AI](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL) for sponsoring OpenPencil!
+
+- ⚡ **Reliable, cost-efficient access:** GPT, Claude, and other leading AI models through one unified API — save up to 70% compared with official API pricing.
+- 🎁 **OpenPencil user bonus:** get **$1 in API credits** when you [sign up through this link](https://fluxionai.world/register?source=github&campaign=github-openpencil&promo=OPENPENCIL).
 
 <table>
 <tr>
@@ -64,7 +75,7 @@ Orchestrator แบ่งหน้าที่ซับซ้อนออกเ�
 
 ### 🔌 MCP Server
 
-ติดตั้งได้ด้วยคลิกเดียวใน Claude Code, Codex, Gemini, OpenCode, Kiro หรือ Copilot CLIs ออกแบบจาก terminal ของคุณ — อ่าน สร้าง และแก้ไขไฟล์ `.op` ผ่าน agent ที่รองรับ MCP
+ติดตั้งได้ด้วยคลิกเดียวใน Claude Code, Codex, OpenCode, Kiro หรือ Copilot CLIs ออกแบบจาก terminal ของคุณ — อ่าน สร้าง และแก้ไขไฟล์ `.op` ผ่าน agent ที่รองรับ MCP
 
 </td>
 </tr>
@@ -80,7 +91,7 @@ Orchestrator แบ่งหน้าที่ซับซ้อนออกเ�
 
 ### 🖥️ ใช้งานได้ทุกที่
 
-เว็บแอป + เดสก์ท็อปแบบ native บน macOS, Windows และ Linux ผ่าน Electron อัปเดตอัตโนมัติจาก GitHub Releases เชื่อมโยงไฟล์ `.op` — ดับเบิลคลิกเพื่อเปิด
+เว็บแอป + เดสก์ท็อปแบบ native บน macOS, Windows และ Linux — Rust core เดียว, binary แบบ self-contained เดียว ไม่มี browser engine เชื่อมโยงไฟล์ `.op` — ดับเบิลคลิกเพื่อเปิด
 
 </td>
 </tr>
@@ -102,72 +113,129 @@ Orchestrator แบ่งหน้าที่ซับซ้อนออกเ�
 </tr>
 </table>
 
+## การติดตั้ง
+
+**คอมไพล์บน Windows:** [BUILD_WINDOWS.th.md](./docs/build_windows/BUILD_WINDOWS.th.md)
+
+**macOS (Homebrew):**
+
+```bash
+brew tap zseven-w/openpencil
+brew install --cask openpencil
+```
+
+**Windows (Scoop):**
+
+```powershell
+scoop bucket add openpencil https://github.com/zseven-w/scoop-openpencil
+scoop install openpencil
+```
+
+**ดาวน์โหลดโดยตรงสำหรับ Linux / Windows:** [GitHub Releases](https://github.com/ZSeven-W/openpencil/releases) — `.exe` (Windows), `.AppImage` / `.deb` (Linux)
+
+**Nix (Linux x86_64):**
+
+```bash
+nix develop
+nix run .                         # เปิดแอป desktop
+nix build .#openpencil            # native web host + CanvasKit web bundle
+nix build .#op-cli                # `op` CLI
+nix build .#prebuilt              # ใช้ upstream desktop archive ที่ตรงกัน
+nix build .#prebuilt-cli          # ใช้ upstream CLI archive ที่ตรงกัน
+nix build .#web-server            # native web server ที่ไม่ใช้ GL + web bundle
+nix build .#runtime-prebuilt      # prebuilt desktop + `op` CLI runtime
+nix build .#web-sdk-packages      # npm tarball สำหรับ web SDK
+nix build .#appimage              # desktop AppImage แบบพกพา
+```
+
+flake ใช้ Rust toolchain ที่ pin ไว้ใน `rust-toolchain.toml` และปัจจุบันเผยแพร่
+สำหรับ `x86_64-linux` โดย flake ยังไม่สร้างแพ็กเกจ Debian หากต้องการ `.deb`
+ให้ใช้ artifact จาก upstream release ส่วน output `prebuilt` จะใช้เวอร์ชัน
+release และ hash ที่ pin ไว้ใน `nix/release-manifest.json` โดยไม่ขึ้นกับเวอร์ชัน
+source ของ workspace หลังเผยแพร่ release แล้ว release workflow จะเปิด PR
+เพื่ออัปเดต manifest นี้ จนกว่า PR จะ merge output แบบ prebuilt จะยังใช้
+release ที่เผยแพร่ก่อนหน้า ส่วน output ที่ build จาก source จะใช้ source
+ที่ checkout อยู่เสมอ
+
+**CLI (`op`):**
+
+```bash
+brew install zseven-w/openpencil/op
+```
+
+หรือใช้สคริปต์ติดตั้ง (macOS / Linux):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | bash
+```
+
+หากต้องการอนุญาต pre-release ล่าสุด:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.sh | OP_PRERELEASE=1 bash
+```
+
+Windows PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+หากต้องการอนุญาต pre-release ล่าสุด:
+
+```powershell
+$env:OP_PRERELEASE = "1"; irm https://raw.githubusercontent.com/ZSeven-W/openpencil/main/scripts/install-op.ps1 | iex
+```
+
+## Clone (พร้อม submodule)
+
+```bash
+git clone --recurse-submodules https://github.com/ZSeven-W/openpencil.git
+# หาก clone แล้ว ให้ sync ก่อนเพื่อให้ URL submodule เดิมรับการเปลี่ยนแปลงจาก .gitmodules:
+git submodule sync --recursive && git submodule update --init --recursive
+```
+
+มี submodule สามรายการภายใต้ `vendor/` ทั้งหมดเป็นสาธารณะและดึงผ่าน HTTPS (ไม่ต้องใช้ SSH key): `jian` (GPU-Skia UI framework — widget/render/event), `casement` (winit fork) และ `agent` (`agent-rs` — Rust agent runtime ข้ามผลิตภัณฑ์ที่ OP และ Zode ใช้ร่วมกัน) ส่วน `vendor/anthropic-agent-sdk` ถูกติดตามโดยตรงใน repository และไม่ใช่ submodule
+
 ## เริ่มต้นอย่างรวดเร็ว
 
 ```bash
-# ติดตั้ง dependencies
-bun install
-
-# เริ่ม dev server ที่ http://localhost:3000
-bun --bun run dev
+# Web dev server (builds the CanvasKit wasm bundle, then runs the headless web host)
+bash scripts/start-web-rust.sh
 ```
 
 หรือรันเป็นแอปพลิเคชัน Desktop:
 
 ```bash
-bun run electron:dev
+cargo run -p op-host-desktop
 ```
 
-> **ข้อกำหนดเบื้องต้น:** [Bun](https://bun.sh/) >= 1.0 และ [Node.js](https://nodejs.org/) >= 18
+> **ข้อกำหนดเบื้องต้น:** ต้องใช้ [Rust](https://www.rust-lang.org/) (stable) เพื่อ build ผลิตภัณฑ์ [Bun](https://bun.sh/) >= 1.0 และ [Node.js](https://nodejs.org/) >= 18 จำเป็นเฉพาะสำหรับ web SDK ใน `packages/` เท่านั้น
 
 ### Docker
 
-มี image หลายรูปแบบให้เลือก — เลือกแบบที่เหมาะกับความต้องการของคุณ:
+Rust release ที่มี tag จะเผยแพร่ image แบบ web host เพียงตัวเดียว ส่วน image TypeScript เดิมที่รวม AI CLI จะไม่ถูกเผยแพร่อีกต่อไป
 
-| Image                        | ขนาด    | รวม                    |
-| ---------------------------- | ------- | ---------------------- |
-| `openpencil:latest`          | ~226 MB | เว็บแอปเท่านั้น        |
-| `openpencil-claude:latest`   | —       | + Claude Code CLI      |
-| `openpencil-codex:latest`    | —       | + Codex CLI            |
-| `openpencil-opencode:latest` | —       | + OpenCode CLI         |
-| `openpencil-copilot:latest`  | —       | + GitHub Copilot CLI   |
-| `openpencil-gemini:latest`   | —       | + Gemini CLI           |
-| `openpencil-full:latest`     | ~1 GB   | เครื่องมือ CLI ทั้งหมด |
+| Image | รวม |
+| --- | --- |
+| `ghcr.io/zseven-w/openpencil-web:vX.Y.Z` | Rust web host, wasm bundle และ CanvasKit assets |
 
-**รัน (เว็บเท่านั้น):**
+Web UI แสดงเฉพาะ built-in agent profiles เท่านั้น เครื่องมือ Claude/Codex/OpenCode/Copilot CLI จะไม่ถูกบันเดิลใน Docker images
+
+**รัน:**
 
 ```bash
-docker run -d -p 3000:3000 ghcr.io/zseven-w/openpencil:latest
+VERSION="$(scripts/workspace-version.sh)"
+docker run -d -p 3100:3100 "ghcr.io/zseven-w/openpencil-web:v${VERSION}"
 ```
 
-**รันพร้อม AI CLI (เช่น Claude Code):**
-
-AI chat ต้องใช้การเข้าสู่ระบบ OAuth ของ Claude CLI ใช้ Docker volume เพื่อเก็บรักษา session การเข้าสู่ระบบ:
-
-```bash
-# ขั้นตอนที่ 1 — เข้าสู่ระบบ (ครั้งเดียว)
-docker volume create openpencil-claude-auth
-docker run -it --rm \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest claude login
-
-# ขั้นตอนที่ 2 — เริ่มต้น
-docker run -d -p 3000:3000 \
-  -v openpencil-claude-auth:/root/.claude \
-  ghcr.io/zseven-w/openpencil-claude:latest
-```
+จากนั้นเปิด `http://localhost:3100/`
 
 **Build ในเครื่อง:**
 
 ```bash
-# พื้นฐาน (เว็บเท่านั้น)
-docker build --target base -t openpencil .
-
-# พร้อม CLI เฉพาะตัว
-docker build --target with-claude -t openpencil-claude .
-
-# เต็มรูปแบบ (CLI ทั้งหมด)
-docker build --target full -t openpencil-full .
+docker build -f Dockerfile.web-rust -t openpencil-web-rust .
+docker run -p 3100:3100 openpencil-web-rust
 ```
 
 ## การออกแบบที่ขับเคลื่อนด้วย AI
@@ -188,7 +256,6 @@ docker build --target full -t openpencil-full .
 | **Codex CLI**               | เชื่อมต่อใน Agent Settings (`Cmd+,`)                                                           |
 | **OpenCode**                | เชื่อมต่อใน Agent Settings (`Cmd+,`)                                                           |
 | **GitHub Copilot**          | `copilot login` จากนั้นเชื่อมต่อใน Agent Settings (`Cmd+,`)                                    |
-| **Gemini CLI**              | เชื่อมต่อใน Agent Settings (`Cmd+,`)                                                           |
 
 **โปรไฟล์ความสามารถของโมเดล** — ปรับ prompt, โหมด thinking และ timeout ตามระดับโมเดลโดยอัตโนมัติ โมเดลระดับเต็ม (Claude) ได้ prompt ครบถ้วน; โมเดลระดับมาตรฐาน (GPT-4o, Gemini, DeepSeek) ปิด thinking; โมเดลระดับพื้นฐาน (MiniMax, Qwen, Llama, Mistral) ได้ prompt แบบ nested-JSON ที่ย่อลงเพื่อความเสถียรสูงสุด
 
@@ -196,8 +263,8 @@ docker build --target full -t openpencil-full .
 
 **MCP Server**
 
-- MCP Server ในตัว — ติดตั้งได้ด้วยคลิกเดียวใน Claude Code / Codex / Gemini / OpenCode / Kiro / Copilot CLIs
-- ตรวจจับ Node.js อัตโนมัติ — หากไม่ได้ติดตั้ง จะสำรองไปใช้ HTTP transport และเริ่ม MCP HTTP server โดยอัตโนมัติ
+- MCP Server ในตัว (`op-mcp` crate) — ติดตั้งได้ด้วยคลิกเดียวใน Claude Code / Codex / OpenCode / Kiro / Copilot CLIs
+- ไม่ต้องใช้ Node.js — stdio transport ผ่าน binary เดสก์ท็อป (`--mcp <path>`) พร้อม live HTTP endpoint (`127.0.0.1:<port>/mcp`) จากแอปที่กำลังทำงาน
 - การทำ Design automation จาก terminal: อ่าน สร้าง และแก้ไขไฟล์ `.op` ผ่าน agent ที่รองรับ MCP
 - **Layered design workflow** — `design_skeleton` → `design_content` → `design_refine` สำหรับดีไซน์หลายส่วนที่มีความละเอียดสูงขึ้น
 - **Segmented prompt retrieval** — โหลดเฉพาะความรู้ด้านดีไซน์ที่ต้องการ (schema, layout, roles, icons, planning ฯลฯ)
@@ -213,20 +280,22 @@ docker build --target full -t openpencil-full .
 ติดตั้งแบบ global และควบคุมเครื่องมือออกแบบจาก terminal ของคุณ:
 
 ```bash
-npm install -g @zseven-w/openpencil
+brew install zseven-w/openpencil/op
 ```
 
 ```bash
 op start                     # เปิดแอปเดสก์ท็อป
+op start --headless --file design.op # เริ่มเซิร์ฟเวอร์แบบ headless
 op design @landing.txt       # ออกแบบแบบ batch จากไฟล์
-op insert '{"type":"RECT"}'  # แทรก node
+op design @ui.js             # JavaScript แบบ sandbox พร้อม loop
+op insert '{"type":"rectangle"}' # แทรก node
 op import:figma design.fig   # นำเข้าไฟล์ Figma
 cat design.dsl | op design - # Pipe จาก stdin
 ```
 
-รองรับ 3 วิธีการป้อนข้อมูล: สตริงแบบ inline, `@filepath` (อ่านจากไฟล์) หรือ `-` (อ่านจาก stdin) ทำงานร่วมกับแอปเดสก์ท็อปหรือ web dev server ดู [CLI README](./apps/cli/README.md) สำหรับคู่มือคำสั่งฉบับเต็ม
+รองรับสตริง inline, `@filepath` และ stdin (`-`) ทำงานร่วมกับแอปเดสก์ท็อป เว็บเซิร์ฟเวอร์ หรือเซิร์ฟเวอร์ headless ที่ใช้ไฟล์ ดูคำสั่งทั้งหมดใน [คู่มือคำสั่ง CLI](./crates/op-cli/src/usage.txt)
 
-**LLM Skill** — ติดตั้งปลั๊กอิน [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill) เพื่อสอน AI agent (Claude Code, Cursor, Codex, Gemini CLI ฯลฯ) ออกแบบด้วย `op`
+**LLM Skill** — ติดตั้งปลั๊กอิน [OpenPencil Skill](https://github.com/ZSeven-W/openpencil-skill) เพื่อสอน AI agent ออกแบบด้วย `op` ใช้ `op install` สำหรับ agent ที่ตรวจพบ หรือ `op install --target codex` เพื่อระบุเป้าหมาย
 
 ## ฟีเจอร์
 
@@ -254,8 +323,30 @@ cat design.dsl | op design - # Pipe จาก stdin
 - Layered workflow — `design_skeleton` → `design_content` → `design_refine` พร้อม prompt ที่เน้นเฉพาะในแต่ละเฟส
 - Style Guides — สไตล์ในตัวกว่า 50 แบบ (glassmorphism, brutalist, retro ฯลฯ) พร้อม fuzzy matching ตาม tag ใช้ในการวางแผนและการสร้าง
 - โปรไฟล์ความสามารถหลายโมเดล — ปรับโหมดการคิด ความพยายาม และรูปแบบ prompt อัตโนมัติตามระดับโมเดล
-- Agent runtime ในตัว (`agent-native`, Zig NAPI) + ผู้ให้บริการ Anthropic, Claude Agent SDK, OpenCode, Codex, Copilot, Gemini
+- Agent runtime ในตัว (Rust) + ผู้ให้บริการ Anthropic, Claude Agent SDK, OpenCode, Codex, Copilot และ Google Gemini API
 - Passthrough รูปแบบ Anthropic สำหรับผู้ให้บริการ LLM จีน — Kimi, Zhipu, GLM, DouBao, Ark, Bailian/DashScope, ModelScope, Coding Plans
+
+**การทำงานร่วมกัน**
+
+- เซสชันแบบ peer-to-peer (P2P) ที่ยืนยันตัวตน พร้อม public relay สำรองและ collaboration hub ประจำภูมิภาคในตัว
+- เข้าร่วมด้วยรหัสจับคู่ 10 อักขระที่ติดแท็กภูมิภาค — ไม่ต้องมีบัญชีสำหรับเซสชัน LAN
+- เคอร์เซอร์ระยะไกลแบบเรียลไทม์ การทำงานร่วมกันข้ามบัญชี และ conflict panel พร้อมรายละเอียดต่อการแก้ไขและการเล่นซ้ำการแก้ไขที่ถูกทิ้ง
+- โหมด multi-tenant ออนไลน์สำหรับ daemon `--serve-web` ยืนยันตัวตนกับ op-hub พร้อมการแชร์ tenant ข้ามบัญชี
+- Device login — ลงชื่อเข้าใช้จากเบราว์เซอร์ผ่าน serve-web daemon พร้อม avatar โปรไฟล์และชื่อผู้ใช้ในตัว editor
+
+**เด็คงานนำเสนอ**
+
+- เทมเพลตเด็ค 16:9 จำนวนหกแบบพร้อมตัวเลือกเทมเพลต และการวางแผนเด็คด้วย AI ที่ขนาดโปรเจกเตอร์ — หนึ่งสไลด์ต่อหนึ่งหน้าจอ
+- นำเสนอเด็คเป็นสไลด์โชว์พร้อมตัวควบคุมสำหรับผู้นำเสนอ
+- ส่งออกเด็คเป็น PDF (หนึ่งหน้าต่อหนึ่งสไลด์), ไฟล์ HTML สไลด์โชว์แบบ self-contained, PowerPoint ที่แก้ไขได้ (`.pptx`) หรือ hyperframes video composition
+- ตัวนำทาง slides rail; agent ตรวจสอบเรขาคณิตของ board เด็ค (aspect, overflow, centering) รวมถึง prompt ด้วย
+
+**เทมเพลตและการจับภาพเว็บ**
+
+- Scene template center — แคตตาล็อกที่เรียกดูได้ของเทมเพลต 58 แบบใน 6 ฉาก เปิดจาก File ▸ New from template
+- Prompt center พร้อมรายการ web, dashboard, component และ modify พร้อมตัวอย่างพรีวิว prompt แบบภาพ
+- Asset center — แกลเลอรีแบบ responsive เต็มหน้าต่างพร้อมเทมเพลตแบบ dual-action และการนำเข้าสไตล์ DESIGN.md
+- [ส่วนขยาย Chrome web-capture](https://chromewebstore.google.com/detail/openpencil/ahfofgelkdaobcmglejmjbpnajhpgcij) — สแนปช็อตหน้าเว็บใดก็ได้เข้าสู่ OpenPencil พร้อมการจับ HTML / layout อย่างเที่ยงตรง; สแนปช็อตจะถูกส่งไปยัง inbox ของบัญชีคุณบน hub หรือดาวน์โหลดเป็นไฟล์ `.op` ที่พร้อมเปิดแบบออฟไลน์
 
 **การเชื่อมต่อ Git**
 
@@ -278,61 +369,97 @@ cat design.dsl | op design - # Pipe จาก stdin
 
 **Desktop App**
 
-- รองรับ macOS, Windows และ Linux แบบ native ผ่าน Electron
+- รองรับ macOS, Windows และ Linux แบบ native — binary แบบ self-contained เดียว (winit + GPU Skia, ไม่มี Electron)
 - เชื่อมโยงไฟล์ `.op` — ดับเบิลคลิกเพื่อเปิด, single-instance lock
-- อัปเดตอัตโนมัติจาก GitHub Releases
+- ตรวจสอบอัปเดตแบบเบื้องหลังจาก GitHub Releases
 - เมนูแอปพลิเคชันแบบ native พร้อม Save As, Open Recent และกล่องโต้ตอบการเปลี่ยนแปลงที่ไม่ได้บันทึกเมื่อปิด
 - การเก็บรักษาไฟล์ล่าสุด
 
 ## Tech Stack
 
-|                |                                                                                  |
-| -------------- | -------------------------------------------------------------------------------- |
-| **Frontend**   | React 19 · TanStack Start · Tailwind CSS v4 · shadcn/ui · i18next                |
-| **Canvas**     | CanvasKit/Skia (WASM, GPU-accelerated)                                           |
-| **State**      | Zustand v5                                                                       |
-| **Server**     | Nitro                                                                            |
-| **Desktop**    | Electron 35                                                                      |
-| **CLI**        | `op` — ควบคุมจาก terminal, batch design DSL                                      |
-| **AI**         | Vercel AI SDK v6 · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
-| **Runtime**    | Bun · Vite 7                                                                     |
-| **รูปแบบไฟล์** | `.op` — ใช้ JSON, อ่านได้โดยมนุษย์, Git-friendly                                 |
+|                |                                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| **Core**       | Rust workspace (`crates/`) — editor state, widgets, hosts, MCP, AI, codegen              |
+| **Rendering**  | GPU Skia ทุกที่ — `skia-safe` (GL) บน native, CanvasKit (WASM/WebGL2) บนเบราว์เซอร์      |
+| **เฟรมเวิร์ก UI** | jian — เฟรมเวิร์ก UI แบบ GPU-Skia ที่เป็น pure-Rust และ vendored: widgets, layout, events, hot reload (`vendor/jian`) |
+| **Windowing**  | winit (vendored `casement` fork)                                                         |
+| **Desktop**    | Native binary `openpencil-desktop` — ไม่มี browser engine                                |
+| **Web SDK**    | `op-web-sdk` + React 19 / Vue 3 adapters — `.op` viewer แบบอ่านอย่างเดียว (TypeScript)   |
+| **CLI**        | `op` — ควบคุมจาก terminal, batch design DSL                                              |
+| **AI**         | Agent runtime ในตัว (Rust) · Anthropic SDK · Claude Agent SDK · OpenCode SDK · Copilot SDK |
+| **Lint**       | clippy · rustfmt (Rust) · oxlint · oxfmt (web SDK)                                       |
+| **รูปแบบไฟล์** | `.op` — ใช้ JSON, อ่านได้โดยมนุษย์, Git-friendly                                         |
+
+## ระบบนิเวศ
+
+OpenPencil เป็นส่วนหนึ่งของตระกูลเครื่องมือแบบ pure-Rust ที่ขับเคลื่อนด้วย AI จาก **[ZSeven-W](https://github.com/ZSeven-W)** ซึ่งประกอบเข้าด้วยกัน: `jian` เรนเดอร์ OpenPencil, `agent-rs` รันเอเจนต์ของมัน, `noema` จดจำ, และ `zode` ออกแบบจากเทอร์มินัล
+
+| โปรเจกต์ | คืออะไร |
+| -------- | ------- |
+| **[DSH OpenPencil](https://github.com/ZSeven-W/dsh-openpencil)** | ปลั๊กอิน DeepSeek Harness สำหรับ OpenPencil — การแสดงตัวอย่าง `.op` หลายเฟรมที่แม่นยำ แคนวาสแบบอินเทอร์แอคทีฟ และเอดิเตอร์ที่มีการจัดการพร้อมเครื่องมือออกแบบแบบเอเจนต์เนทีฟ ภายในบทสนทนา |
+| **[Zode](https://github.com/ZSeven-W/zode)** | ผู้ช่วยเขียนโค้ดแบบโอเพนซอร์สที่ขับเคลื่อนด้วย AI สำหรับเทอร์มินัลของคุณ — Rust TUI (`ratatui`) ที่รวดเร็วซึ่งอ่านโค้ดของคุณ รันคำสั่ง ค้นหาไฟล์ และจัดการ git ขับเคลื่อน OpenPencil ผ่าน MCP |
+| **[agent-rs](https://github.com/ZSeven-W/agent-rs)** | async runtime แบบ pure-Rust สำหรับส่งมอบ LLM agent — รองรับหลายผู้ให้บริการ ใช้เครื่องมือได้แบบ end-to-end สิทธิ์แบบมีโครงสร้าง MCP จริง และ `unsafe` เป็นศูนย์ ขับเคลื่อน agent runtime ในตัวของ OpenPencil (`vendor/agent`) และ Zode |
+| **[jian](https://github.com/ZSeven-W/jian)** | เฟรมเวิร์ก UI แบบ GPU-Skia ที่เป็น pure-Rust — widgets, layout, events และ hot reload ในสแตกเดียว เปลี่ยนเอกสาร `.op` แบบ declarative ให้เป็นแอปแบบ native ที่ควบคุมด้วย AI ได้ โดยไม่มี JS runtime, ไม่มี DOM, ไม่มี Electron เฟรมเวิร์ก UI ของ OpenPencil (`vendor/jian`) |
+| **[noema](https://github.com/ZSeven-W/noema)** | ระบบหน่วยความจำแบบ local-first ที่ไม่ใช่เวกเตอร์สำหรับ coding agent หน่วยความจำที่คงทนในรูปแบบไฟล์ที่ตรวจสอบได้ คิวสำหรับตรวจทานรายการใหม่ และการเรียกคืนแบบ lexical (ไม่ใช้ embedding) — ทำงานได้ทั้งบน Zode, Codex, Claude Code และ MCP runtime |
+
+## ทำไมต้อง Rust
+
+OpenPencil ถูกเขียนใหม่ตั้งแต่ต้นด้วย **Rust** ([#129](https://github.com/ZSeven-W/openpencil/issues/129)) การเขียนใหม่เสร็จสมบูรณ์แล้ว — editor แบบ TypeScript + Electron ถูกเลิกใช้ที่ `v0.7.5` และ Rust workspace ในรีโปนี้คือตัวผลิตภัณฑ์: core แบบ native เดียวที่เล็กและเร็วกว่าอย่างเห็นได้ชัด และรองรับได้บนหลายแพลตฟอร์มจาก codebase เดียว
+
+|                        | TypeScript + Electron (เลิกใช้แล้ว, `v0.7.5`) | Rust (ปัจจุบัน)                                                       |
+| ---------------------- | --------------------------------------------- | -------------------------------------------------------------------- |
+| **Desktop runtime**    | Electron — รวม Chromium + Node.js             | หน้าต่างแบบ native (`winit` + GPU Skia) ไม่มี browser engine         |
+| **ขนาดบน Desktop**     | Chromium runtime เต็มรูปแบบต่อการติดตั้ง     | ไฟล์ binary เดียวที่พร้อมใช้งาน — **55.5 MB**                        |
+| **ขนาด payload บนเว็บ** | JS + WASM bundle                              | **8.2 MB** wasm / **2.18 MB** gzip บนเครือข่าย                       |
+| **การ Render**          | CanvasKit/Skia บนเว็บ                         | Skia backend เดียวที่เร่งด้วย GPU บน **ทุก** เป้าหมาย               |
+| **หน่วยความจำ**         | JavaScript GC หยุดชั่วคราว                   | ไม่มี GC — Rust ownership latency คาดเดาได้                          |
+| **Codebase**            | Web stack + Electron         | Rust workspace เดียว: editor · CLI · MCP · AI · codegen · Figma · Git |
+| **เป้าหมาย**           | Web + desktop สอง stack แยกกัน               | Desktop (macOS/Win/Linux) · mobile (iOS/Android) · browser — one core |
+
+**ผลการวัดที่ได้จริง**
+
+- **ขนาดเล็กมาก** — แอปเดสก์ท็อปทั้งหมดเป็น binary แบบ native เดียวขนาด **55.5 MB** แทนที่จะเป็น browser engine รวมกับ Node runtime เว็บบิลด์มีขนาด **8.2 MB** raw / **2.18 MB** gzip หลังจากแยก icon catalog (−48% บนเครือข่าย)
+- **รองรับเอกสารขนาดใหญ่** — canvas ที่มี **10,000-node** (nested auto-layout สี่ระดับ) เขียน อ่าน และ snapshot layout **โดยไม่มี panic และ ~0% idle CPU**; การ snapshot layout ทั้งหมด 10k node คืนค่าใน **~0.68 s**
+- **การโต้ตอบที่รวดเร็ว** — pan/zoom ไม่ต้อง re-serialize เอกสารทุก frame อีกต่อไป (การแก้ไข hot-path เพียงครั้งเดียวลด CPU ของ wheel-zoom จาก **~69% เหลือ ~0%**); การลากแก้ไข scene แบบ incremental การวัดตัวอักษรถูก cache และการวาดซ้ำรวมเป็นหนึ่งต่อ frame
+- **Core เดียว ทุกหน้าจอ** — editor state และ render backend เดียวกันคอมไพล์ไปยัง native desktop, mobile และ browser ผ่าน WASM — ไม่ต้องคงการ implement แบบคู่ขนานให้ตรงกัน
+- **GPU Skia ทุกที่** — native render ผ่าน `skia-safe` บน GL context; browser render ผ่าน CanvasKit บน WebGL2 — โค้ดการวาดเดียวกัน ผลลัพธ์เดียวกัน
+- **Accessibility แบบ native** — AccessKit บน macOS, Windows และ Linux พร้อม DOM mirror บนเว็บ แทนที่จะพึ่งพา a11y tree ของ browser
+- **Workspace ที่ตรวจสอบ type เดียว** — MCP host, CLI, AI providers, code generation, Figma import และ Git integration ทั้งหมดอยู่ใน Rust workspace เดียว พร้อม `cargo-deny` ตรวจสอบ supply-chain ใน CI
+
+> **สถานะ:** editor แบบ TypeScript ถูกเลิกใช้ที่ `v0.7.5` และเหลืออยู่เพียงใน git history เท่านั้น รีโปนี้คือ Rust workspace ผลิตภัณฑ์ Rust อยู่ระหว่างการพัฒนาอย่างต่อเนื่อง (ดู Roadmap ด้านล่าง)
 
 ## โครงสร้างโปรเจกต์
 
 ```text
 openpencil/
-├── apps/
-│   ├── web/                 TanStack Start web app
-│   │   ├── src/
-│   │   │   ├── canvas/      CanvasKit/Skia engine — การวาด, sync, layout
-│   │   │   ├── components/  React UI — editor, panels, shared dialogs, icons
-│   │   │   ├── services/ai/ AI chat, orchestrator, การสร้างดีไซน์, streaming
-│   │   │   ├── stores/      Zustand — canvas, document, pages, history, AI
-│   │   │   ├── mcp/         MCP server tools สำหรับการเชื่อมต่อ CLI ภายนอก
-│   │   │   ├── hooks/       Keyboard shortcuts, file drop, Figma paste
-│   │   │   └── uikit/       ระบบ component kit ที่นำกลับมาใช้ใหม่ได้
-│   │   └── server/
-│   │       ├── api/ai/      Nitro API — streaming chat, generation, validation
-│   │       └── utils/       Claude CLI, OpenCode, Codex, Copilot wrappers
-│   ├── desktop/             Electron desktop app
-│   │   ├── main.ts          Window, Nitro fork, native menu, auto-updater
-│   │   ├── ipc-handlers.ts  ไดอะล็อกไฟล์เนทีฟ, ซิงค์ธีม, การตั้งค่า IPC
-│   │   └── preload.ts       IPC bridge
-│   └── cli/                 เครื่องมือ CLI — คำสั่ง `op`
-│       ├── src/commands/    คำสั่ง design, document, export, import, node, page, variable
-│       ├── connection.ts    การเชื่อมต่อ WebSocket ไปยังแอปที่กำลังทำงาน
-│       └── launcher.ts      ตรวจจับและเปิดแอปเดสก์ท็อปหรือ web server อัตโนมัติ
-├── packages/
-│   ├── pen-types/           Type definitions สำหรับ PenDocument model
-│   ├── pen-core/            Document tree ops, layout engine, variables
-│   ├── pen-codegen/         Code generators (React, HTML, Vue, Flutter, ...)
-│   ├── pen-figma/           Figma .fig file parser และ converter
-│   ├── pen-renderer/        Standalone CanvasKit/Skia renderer
-│   ├── pen-sdk/             Umbrella SDK (re-exports ทุก package)
-│   ├── pen-ai-skills/       AI prompt skill engine (โหลด prompt ตามเฟส)
-│   └── agent/               AI Agent SDK (Vercel AI SDK, หลายผู้ให้บริการ, ทีม Agent)
-└── .githooks/               Pre-commit version sync จาก branch name
+├── crates/                   Rust workspace — ตัวผลิตภัณฑ์
+│   ├── op-editor-core/       Editor state ของ `.op` (PenDocument) ที่เป็นแหล่งจริง + EditorCommand + design variables
+│   ├── op-editor-ui/         Widget ที่ไม่ผูกกับแพลตฟอร์ม + RenderBackend facade (wasm32-clean)
+│   ├── op-editor-host-core/  Host state machine ที่ไม่ผูกกับ transport ใช้ร่วมกันทุก host
+│   ├── op-host-native/       Native host lib — winit + skia-safe GL (เดสก์ท็อป + มือถือ)
+│   ├── op-host-web/          Browser bundle — wasm32 cdylib, CanvasKit renderer
+│   ├── op-host-desktop/      Desktop binary `openpencil-desktop`; เป็น daemon `--serve-web` ด้วย
+│   ├── op-host-services/     Headless serve-web / MCP daemon lib
+│   ├── op-host-web-server/   Web-server binary แบบไม่มี GL
+│   ├── op-cli/               เครื่องมือ CLI — คำสั่ง `op`
+│   ├── op-mcp/               MCP server — tools, batch design, layered workflow
+│   ├── op-ai/                AI providers, chat runtime, streaming
+│   ├── op-ai-skills/         AI prompt skill engine (โหลด prompt ตามเฟส)
+│   ├── op-orchestrator/      การจัดการทีม agent ที่ทำงานพร้อมกัน
+│   ├── op-codegen/           Code generators (React, HTML, Vue, Flutter, ...)
+│   ├── op-figma/             Figma .fig file parser และ converter
+│   ├── op-git/               การเชื่อมต่อ Git — clone, branch, push/pull, merge
+│   └── ...                   op-opmerge / op-pen-loader / op-design-lint / op-i18n /
+│                             op-config-store / op-process-io / op-acp / op-smoke / ...
+├── packages/                 Web SDK workspace (Bun)
+│   ├── op-web-sdk/           `.op` web viewer SDK แบบอ่านอย่างเดียว (wrap wasm bundle)
+│   ├── op-web-sdk-react/     React 19 adapter
+│   └── op-web-sdk-vue/       Vue 3 adapter
+├── vendor/                   Subsystem แบบ vendored (git submodules)
+│   ├── jian/                 เฟรมเวิร์ก UI แบบ GPU-Skia — widget/render/event
+│   ├── casement/             winit fork
+│   └── agent/                Rust agent runtime ข้ามผลิตภัณฑ์ (agent-rs)
+└── .githooks/                การตรวจสอบความคลาดเคลื่อนของเวอร์ชันก่อน commit
 ```
 
 ## คีย์ลัด
@@ -356,15 +483,23 @@ openpencil/
 ## Scripts
 
 ```bash
-bun --bun run dev          # Dev server (port 3000)
-bun --bun run build        # Production build
-bun --bun run test         # รันการทดสอบ (Vitest)
-npx tsc --noEmit           # ตรวจสอบ type
-bun run bump <version>     # Sync version ในทุก package.json
-bun run electron:dev       # Electron dev
-bun run electron:build     # Electron package
-bun run cli:dev            # รัน CLI จาก source
-bun run cli:compile        # คอมไพล์ CLI ไปยัง dist
+# Product (Rust — run from the repo root)
+cargo build --workspace              # Build all crates (add --release for prod)
+cargo test --workspace               # Run all tests
+cargo check --workspace              # Type check
+cargo clippy --workspace --all-targets -- -D warnings   # Lint
+cargo fmt --all                      # Format
+bash scripts/start-web-rust.sh       # Web dev server (wasm bundle + headless host)
+cargo run -p op-host-desktop         # Desktop app (binary: openpencil-desktop)
+cargo run -p op-cli -- <args>        # CLI (binary: op)
+
+# Web SDK / JS tooling (run from packages/)
+cd packages && bun run lint          # Lint the web SDK (oxlint); also: bun run format
+cd packages && bun run generate-iconify-catalog   # Regenerate the Rust icon catalog assets
+
+# การซิงค์เวอร์ชัน (เรียกใช้จากรากของ repository)
+scripts/sync-version.sh                            # Sync all managed versions from root Cargo.toml
+tools/check-version-sync.sh                        # Verify all managed versions match root Cargo.toml
 ```
 
 ## การมีส่วนร่วม
@@ -372,9 +507,9 @@ bun run cli:compile        # คอมไพล์ CLI ไปยัง dist
 ยินดีต้อนรับการมีส่วนร่วมทุกรูปแบบ! ดู [CLAUDE.md](./CLAUDE.md) สำหรับรายละเอียดสถาปัตยกรรมและรูปแบบโค้ด
 
 1. Fork และ clone
-2. ตั้งค่า version sync: `git config core.hooksPath .githooks`
+2. เปิดใช้การตรวจสอบความคลาดเคลื่อนของเวอร์ชัน: `git config core.hooksPath .githooks`
 3. สร้าง branch: `git checkout -b feat/my-feature`
-4. รันการตรวจสอบ: `npx tsc --noEmit && bun --bun run test`
+4. รันการตรวจสอบ: `cargo test --workspace && cargo clippy --workspace --all-targets -- -D warnings`
 5. Commit ด้วย [Conventional Commits](https://www.conventionalcommits.org/): `feat(canvas): add rotation snapping`
 6. เปิด PR เข้า `main`
 
@@ -388,13 +523,20 @@ bun run cli:compile        # คอมไพล์ CLI ไปยัง dist
 - [x] นำเข้า Figma `.fig`
 - [x] Boolean operations (union, subtract, intersect)
 - [x] โปรไฟล์ความสามารถหลายโมเดล
-- [x] ปรับโครงสร้างเป็น monorepo พร้อม package ที่นำกลับมาใช้ใหม่ได้
+- [x] Cargo workspace พร้อม Rust crate และแพ็กเกจ Web SDK ที่นำกลับมาใช้ใหม่ได้
+- [x] Rust editor สำหรับเดสก์ท็อปและ Web
 - [x] เครื่องมือ CLI (`op`) ควบคุมจาก terminal
-- [x] AI Agent SDK ในตัว รองรับหลายผู้ให้บริการ
+- [x] Rust Agent Runtime ในตัว รองรับหลายผู้ให้บริการ
 - [x] i18n — 15 ภาษา
+- [x] Viewer SDK ที่ใช้ wasm สำหรับ JavaScript, React และ Vue
+- [x] Style Guides พร้อมการจับคู่ตามแท็กและเครื่องมือ MCP
+- [x] Concurrent Agent Teams พร้อมการมอบหมายงานและตัวบ่งชี้บน Canvas
 - [x] การเชื่อมต่อ Git (clone, branch, push/pull, three-way merge โหมดโฟลเดอร์)
-- [x] การส่งออก Canvas แบบ raster (PNG / JPEG / WEBP / PDF)
-- [ ] การแก้ไขร่วมกัน
+- [x] การส่งออก Canvas (SVG / PNG / JPEG / WEBP / PDF)
+- [x] การแก้ไขร่วมกัน — P2P ที่ยืนยันตัวตน, public relay และ hub ประจำภูมิภาค
+- [x] เด็คงานนำเสนอ — เทมเพลต, ตัวนำเสนอสไลด์โชว์ และการส่งออก PDF/HTML/PPTX/video
+- [x] Device login และการโฮสต์เว็บแบบ multi-tenant ออนไลน์
+- [x] ส่วนขยาย Chrome web-capture พร้อมการนำเข้า HTML / browser-snapshot
 - [ ] ระบบปลั๊กอิน
 
 ## ผู้มีส่วนร่วม
@@ -416,20 +558,21 @@ OpenPencil เป็นซอฟต์แวร์ฟรีและโอเพ
 ## ชุมชน
 
 <a href="https://discord.gg/h9Fmyy6pVh">
-  <img src="./apps/web/public/logo-discord.svg" alt="Discord" width="16" />
+  <img src="./screenshot/logo-discord.svg" alt="Discord" width="16" />
   <strong> เข้าร่วม Discord ของเรา</strong>
 </a>
 — ถามคำถาม แชร์ดีไซน์ เสนอฟีเจอร์
 
-## Star History
+**ชุมชนที่ได้รับการยอมรับ: [LINUX DO](https://linux.do/)**
 
-<a href="https://star-history.com/#ZSeven-W/openpencil&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ZSeven-W/openpencil&type=Date" width="100%" />
- </picture>
-</a>
+## ไลบรารีจากบุคคลที่สามที่เรา fork
+
+ขอขอบคุณผู้ดูแลโครงการต้นทางซึ่งผลงานของพวกเขาเป็นรากฐานของ OpenPencil สำเนาเหล่านี้ได้รับการดูแลเฉพาะเพื่อรองรับความต้องการด้านการผสานรวมของ OpenPencil เท่านั้น:
+
+- **[casement](https://github.com/ZSeven-W/casement)** — fork มาจาก **[winit](https://github.com/rust-windowing/winit)**
+- **[anthropic-agent-sdk](./vendor/anthropic-agent-sdk)** — นำโค้ดมาจาก **[bartolli/anthropic-agent-sdk](https://github.com/bartolli/anthropic-agent-sdk)** และดูแลในรูปแบบ local fork
+
+แต่ละโครงการยังคงอยู่ภายใต้สัญญาอนุญาตของโครงการต้นทาง
 
 ## การประเมิน
 
